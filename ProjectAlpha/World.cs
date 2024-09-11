@@ -28,6 +28,12 @@ public static class World
     public const int LOCATION_ID_BRIDGE = 8;
     public const int LOCATION_ID_SPIDER_FIELD = 9;
 
+    public static string map =
+        "         [P]          \n" +
+        "         [A]          \n" +
+        "   [V][F][T][G][B][S] \n" +
+        "         [H]          \n";
+
     static World()
     {
         PopulateWeapons();

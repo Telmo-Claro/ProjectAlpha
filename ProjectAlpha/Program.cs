@@ -30,7 +30,7 @@ public class Program
         while (true)
         {
             Console.Clear();
-            Console.WriteLine($"You are in {mc.Current_location.Name}, From here you can go:\n");
+            Console.WriteLine($"Location: {mc.Current_location.Name}\n{mc.Current_location.Description}\n\nFrom here you can go:\n");
             if (mc.Current_location.LocationToNorth is not null)
             {
                 Console.WriteLine($"North (1): {mc.Current_location.LocationToNorth.Name}");
@@ -48,7 +48,9 @@ public class Program
                 Console.WriteLine($"East (4): {mc.Current_location.LocationToEast.Name}");
             }
 
-            Console.WriteLine("\nWhere do you want to go?");
+            Console.WriteLine("\n" +World.map);
+
+            Console.WriteLine("Where do you want to go?");
 
             while (true)
             {
