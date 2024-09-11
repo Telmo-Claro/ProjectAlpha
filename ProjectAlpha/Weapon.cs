@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 
 public class Weapon
 {
-    public int id;
+    public int ID;
     public int maximumDamage;
     public string name;
 
-    public Weapon(int id, int maximumDamage, string name)
+    public Weapon(int id, string name, int maximumDamage)
     {
-        this.id = id;
+        this.ID = id;
         this.maximumDamage = maximumDamage;
         this.name = name;
     }

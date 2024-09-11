@@ -1,16 +1,18 @@
 public class Location
 {
-    public int Id;
+    public int ID;
     public string Name;
     public string Description;
     public Location LocationToNorth;
     public Location LocationToSouth;
     public Location LocationToEast;
     public Location LocationToWest;
+    public Quest QuestAvailableHere;
+    public Monster MonsterLivingHere;
 
     public Location(int id, string name, string description)
     {
-        Id = id;
+        ID = id;
         Name = name;
         Description = description;
 

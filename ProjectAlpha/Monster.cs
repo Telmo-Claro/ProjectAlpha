@@ -1,12 +1,12 @@
 public class Monster
 {
-    public string ID;
+    public int ID;
     public string Name;
     public int CurrentHitPoints;
     public int MaximumHitPoints;
     public int MaximumDamage;
 
-    public Monster(string id, string Name, int CurrentHitPoints, int MaximumHitPoints, int MaximumDamage)
+    public Monster(int id, string Name, int MaximumDamage, int MaximumHitPoints, int CurrentHitPoints)
     {
         this.ID = id;
         this.Name = Name;
