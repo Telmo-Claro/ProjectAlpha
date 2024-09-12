@@ -26,6 +26,7 @@ public class Program
                 }
             }
         }
+
         // menu loop
         while (true)
         {
@@ -65,7 +66,7 @@ public class Program
                     mc.Current_location = mc.Current_location.LocationToSouth;
                     break;
                 }
-                else if ((choice == "3") && (mc.Current_location.LocationToWest is not null))
+                else if ((choice == "3") && (mc.Current_location.LocationToWest is   not null))
                 {
                     mc.Current_location = mc.Current_location.LocationToWest;
                     break;

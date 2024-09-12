@@ -7,30 +7,29 @@ public class Encounter
     public string monster;
     public bool engaged;
 
-    public Encounter(string player, string monster, bool engaged)
+    public Encounter(string player, string monster)
     {
         this.player = player;
-        this.monster = monster; 
-        this.engaged = engaged;
+        this.monster = monster;
     }
 
     public string choice()
     {
         while (true)
         {
-            Console.WriteLine($"You are facing [monster]");
+            Console.WriteLine($"{player} is facing {monster}");
             Console.WriteLine("How do you wish to proceed:");
-            Console.Write("A: Attack\nB: Sneak\nC: Flee");
-            string choice = Console.ReadLine();
-            if (choice == "A")
+            Console.Write("1) Attack\n2) Sneak\n3) Flee");
+            int choice = Convert.ToInt32(Console.ReadLine());
+            if (choice == 1)
             {
-                return "Fight";
+                BattleMode.;
             }
-            else if (choice == "B")
+            else if (choice == 2)
             {
                 return "Sneak";
             }
-            else if (choice == "C")
+            else if (choice == 3)
             {
                 return "Flee";
             }
