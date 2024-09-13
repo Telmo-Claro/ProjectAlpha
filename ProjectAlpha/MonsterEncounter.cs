@@ -23,7 +23,7 @@ public class Encounter
             int choice = Convert.ToInt32(Console.ReadLine());
             if (choice == 1)
             {
-                BattleMode.;
+
             }
             else if (choice == 2)
             {
