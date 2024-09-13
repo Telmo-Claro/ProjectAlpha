@@ -9,6 +9,8 @@ public class Quest
     public int ID;
     public string Name;
     public string Description;
+    public string BeginDialogue;
+    public string EndDialogue;
 
     public Quest(int id, string name, string description)
     {
@@ -16,5 +18,10 @@ public class Quest
         Name = name;
         Description = description;
 
+    }
+
+    public string Info()
+    {
+        return $"{Name} ({Description})";
     }
 }

@@ -34,6 +34,10 @@ public static class World
         "   [V][F][T][G][B][S] \n" +
         "         [H]          \n";
 
+    public static string Alchemist_quest = "Alchemist:\n“Those rats art nibbling on mine own h'rbs! I\r\ncouldst very much useth an adventur'r to taketh\r\ncareth of those folk …”";
+    public static string Farmer_quest = "Farmer:\n“I can't w'rk mine own landeth with those pesky\r\nsnakes slith'ring 'round! Shall thee holp me?”"; 
+    public static string Final_quest_Ready = "Guard:\n“thou hast profed thy grit, enter and slay those snakes”";
+    public static string Final_quest_UnReady = "Guard:\n“Turn back at once, peasant! Unless thee\r\nhast proof of thy grit.”";
     static World()
     {
         PopulateWeapons();
@@ -71,7 +75,7 @@ public static class World
             new Quest(
                 QUEST_ID_CLEAR_ALCHEMIST_GARDEN,
                 "Clear the alchemist's garden",
-                "Kill rats in the alchemist's garden ");
+                "Kill rats in the alchemist's garden");
 
 
         Quest clearFarmersField =
@@ -91,6 +95,11 @@ public static class World
         Quests.Add(clearAlchemistGarden);
         Quests.Add(clearFarmersField);
         Quests.Add(clearSpidersForest);
+
+        // adds dialogue
+        clearAlchemistGarden.BeginDialogue = Alchemist_quest;
+        clearFarmersField.BeginDialogue = Farmer_quest;
+        clearSpidersForest.BeginDialogue = Final_quest_Ready;
     }
 
     public static void PopulateLocations()
