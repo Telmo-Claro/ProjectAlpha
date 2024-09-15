@@ -1,7 +1,7 @@
 public class Player
 {
     public string Name;
-    public string Current_weapon;
+    public Weapon Current_weapon;
     public int Current_hp;
     public int Max_hp;
     public Location Current_location;
@@ -10,7 +10,7 @@ public class Player
     public List<Quest> Done_Quests = new List<Quest>() { };
     public List<Monster> Monster_Encountered = new List<Monster>() { };
 
-    public Player(string name, string current_weapon, int current_hp, int max_hp, Location current_location)
+    public Player(string name, Weapon current_weapon, int current_hp, int max_hp, Location current_location)
     {
         this.Name = name;
         this.Current_weapon = current_weapon;
