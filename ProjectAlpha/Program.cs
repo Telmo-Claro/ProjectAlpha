@@ -75,9 +75,21 @@ public class Program
                 }
             }
 
+            // encounter monster the monster in non-friendly areas
+            if ((mc.Current_location.MonsterLivingHere is not null) && (!mc.Monster_Encountered.Contains(mc.Current_location.MonsterLivingHere)))
+            {
+                while (true)
+                {
+                    Console.Clear();
+                    mc.Monster_Encountered.Add(mc.Current_location.MonsterLivingHere);
+                    Encounter monster = new Encounter(mc, mc.Current_location.MonsterLivingHere);
+                    monster.choice();
+                    break;
+                }
+            }
 
-            // start menu
-            Console.Clear();
+                // start menu
+                Console.Clear();
             Console.WriteLine($"Location: {mc.Current_location.Name}\n{mc.Current_location.Description}\n");
             Console.WriteLine("Move (1)");
             Console.WriteLine("Quests (2)");
@@ -123,8 +135,8 @@ public class Program
                 System.Environment.Exit(0);
             }
 
-            // movement loop
-            while (MoveLoop)
+                // movement loop
+                while (MoveLoop)
             {
                 Console.Clear();
                 Console.WriteLine($"Location: {mc.Current_location.Name}\n{mc.Current_location.Description}\n\nFrom here you can go:\n");

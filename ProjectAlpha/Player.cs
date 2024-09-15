@@ -8,6 +8,7 @@ public class Player
     public Location Previous_Location;
     public List<Quest> Quest_List = new List<Quest> { };
     public List<Quest> Done_Quests = new List<Quest>() { };
+    public List<Monster> Monster_Encountered = new List<Monster>() { };
 
     public Player(string name, string current_weapon, int current_hp, int max_hp, Location current_location)
     {
