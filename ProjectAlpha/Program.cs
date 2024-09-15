@@ -13,7 +13,7 @@ public class Program
             name = Console.ReadLine();
             if (name is not null)
             {
-                mc = new Player(name, "Rusty sword", 50, 50, World.Locations[0]);
+                mc = new Player(name, World.WeaponByID(World.WEAPON_ID_RUSTY_SWORD), 50, 50, World.Locations[0]);
                 Console.Clear();
                 Console.WriteLine($"Greetings, {name}\n");
                 Thread.Sleep(1000);
