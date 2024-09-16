@@ -21,6 +21,8 @@ public class BattleMode
 
         while (Playerrawr.Current_hp > 0)
         {
+            int damage = 0;
+
             if (Monsterrawr.CurrentHitPoints <= 0)
             {
                 Console.WriteLine($"You have defeated the {Monsterrawr.Name}!");
@@ -31,19 +33,20 @@ public class BattleMode
             Console.WriteLine(@"(1) Attack\n(2) Flee\n(3) Look at inventory\n(4) Quit game");
             if (Console.ReadLine() == "1")
             {
-                Console.WriteLine($"You hit {Monsterrawr.Name} for {RandomDamage(0, Weapon.maximumDamage)}");
-                Monsterrawr.CurrentHitPoints -= RandomDamage(0, Weapon.maximumDamage);
+                damage = RandomDamage(0, Weapon.maximumDamage);
+                Console.WriteLine($"You hit {Monsterrawr.Name} for {damage}");
+                Monsterrawr.CurrentHitPoints -= damage;
             }
-            if (Console.ReadLine() == "2")
+            else if (Console.ReadLine() == "2")
             {
                 BattleModeFlee();
                 return;
             }
-            if (Console.ReadLine() == "3")
+            else if (Console.ReadLine() == "3")
             {
                 //inventory open
             }
-            if (Console.ReadLine() == "4")
+            else if (Console.ReadLine() == "4")
             {
                 System.Environment.Exit(0);
             }
@@ -52,9 +55,9 @@ public class BattleMode
             {
                 Console.WriteLine("Wrong input!");
             }
-
-            Console.WriteLine($"The {Monsterrawr.Name} hit you for {RandomDamage(0, Monsterrawr.MaximumDamage)}");
-            Playerrawr.Current_hp -= RandomDamage(0, Monsterrawr.MaximumDamage);
+            damage = RandomDamage(0, Monsterrawr.MaximumDamage);
+            Console.WriteLine($"The {Monsterrawr.Name} hit you for {damage}");
+            Playerrawr.Current_hp -= damage;
         }
     }
 
@@ -77,8 +80,9 @@ public class BattleMode
         }
         else
         {
-            Console.WriteLine($"The {Monsterrawr.Name} hit you for {RandomDamage(0, Monsterrawr.MaximumDamage)} while you were trying to flee!");
-            Playerrawr.Current_hp -= RandomDamage(0, Monsterrawr.MaximumDamage);
+            int damage = RandomDamage(0, Monsterrawr.MaximumDamage);
+            Console.WriteLine($"The {Monsterrawr.Name} hit you for {damage} while you were trying to flee!");
+            Playerrawr.Current_hp -= damage;
         }
     }
 }
