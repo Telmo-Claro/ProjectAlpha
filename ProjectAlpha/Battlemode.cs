@@ -17,6 +17,7 @@ public class BattleMode
 
     public void BattleMenu()
     {
+        Console.Clear();
         Console.WriteLine($"You encountered a {Monsterrawr.Name}!");
 
         while (Playerrawr.Current_hp > 0)
@@ -28,7 +29,7 @@ public class BattleMode
             }
 
             Console.WriteLine("What would you like to do?");
-            Console.WriteLine(@"(1) Attack\n(2) Flee\n(3) Look at inventory\n(4) Quit game");
+            Console.WriteLine($"(1) Attack\n(2) Flee\n(3) Look at inventory\n(4) Quit game");
             if (Console.ReadLine() == "1")
             {
                 Console.WriteLine($"You hit {Monsterrawr.Name} for {RandomDamage(0, Weapon.maximumDamage)}");
