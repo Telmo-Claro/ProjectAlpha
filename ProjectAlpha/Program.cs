@@ -2,7 +2,7 @@ public class Program
 {
     public static void Main()
     {
-        string name;
+        string? name;
         Player mc;
         bool MoveLoop = false;
 
@@ -33,7 +33,7 @@ public class Program
         {
             // checks for when you enter a new location / updates
 
-                    // check for the final boss, first defeat 2 previous quests
+            // check for the final boss, first defeat 2 previous quests
             if ((mc.Current_location == World.LocationByID(World.LOCATION_ID_GUARD_POST)) && ((!mc.Quest_List.Contains(World.QuestByID(World.QUEST_ID_CLEAR_ALCHEMIST_GARDEN))) && (!mc.Quest_List.Contains(World.QuestByID(World.QUEST_ID_CLEAR_FARMERS_FIELD)))))
             {
                 while (true)
@@ -49,7 +49,7 @@ public class Program
                     }
                 }
             }
-                    // checks for quests
+            // checks for quests
             if ((mc.Current_location.QuestAvailableHere is not null) && (!mc.Quest_List.Contains(mc.Current_location.QuestAvailableHere)))
             {
                 while (true)
@@ -88,8 +88,8 @@ public class Program
                 }
             }
 
-                // start menu
-                Console.Clear();
+            // start menu
+            // Console.Clear();
             Console.WriteLine($"Location: {mc.Current_location.Name}\n{mc.Current_location.Description}\n");
             Console.WriteLine("Move (1)");
             Console.WriteLine("Quests (2)");
@@ -103,7 +103,7 @@ public class Program
             }
             else if (Choice == "2")
             {
-                while (true) 
+                while (true)
                 {
                     Console.Clear();
                     Console.WriteLine($"Quests: ");
@@ -135,8 +135,8 @@ public class Program
                 System.Environment.Exit(0);
             }
 
-                // movement loop
-                while (MoveLoop)
+            // movement loop
+            while (MoveLoop)
             {
                 Console.Clear();
                 Console.WriteLine($"Location: {mc.Current_location.Name}\n{mc.Current_location.Description}\n\nFrom here you can go:\n");

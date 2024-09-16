@@ -2,39 +2,39 @@
 using System.Threading;
 
 public class Encounter
-    {
+{
 
-    public Player player;
-    public Monster monster;
+    public Player Player;
+    public Monster Monster;
     public bool monsterDefeated = false;
 
     public Encounter(Monster monster, Player player)
     {
-        this.monster = monster;
-        this.player = player;
+        this.Monster = monster;
+        this.Player = player;
     }
 
     public void choice()
     {
         while (true)
         {
-            Console.WriteLine($"{player.Name} watch out! There is danger ahead!");
+            Console.WriteLine($"{Player.Name} watch out! There is danger ahead!");
             Console.WriteLine("How do you wish to proceed:");
             Console.Write("1) Attack\n2) Sneak\n3) Flee\n> ");
             int choice = Convert.ToInt32(Console.ReadLine());
 
             if (choice == 1)
             {
-                if (player.Current_weapon.maximumDamage != 0)
+                if (Player.Current_weapon.maximumDamage != 0)
                 {
-                    BattleMode battle = new BattleMode(monster, player);
+                    BattleMode battle = new BattleMode(Monster, Player);
                     battle.BattleMenu();
                     break;
                 }
                 else
                 {
                     Console.WriteLine("Ah... maybe grab a weapon?");
-                    player.Monster_Encountered.Remove(monster);
+                    Player.Monster_Encountered.Remove(Monster);
                     break;
                 }
 
@@ -51,15 +51,15 @@ public class Encounter
                 else
                 {
                     Console.WriteLine("Almost! You got caught!");
-                    BattleMode battle = new BattleMode(monster, player);
+                    BattleMode battle = new BattleMode(Monster, Player);
                     battle.BattleMenu();
                     return;
                 }
             }
             else if (choice == 3)
             {
-                (player.Current_location, player.Previous_Location) = (player.Previous_Location, player.Current_location);
-                player.Monster_Encountered.Remove(monster);
+                (Player.Current_location, Player.Previous_Location) = (Player.Previous_Location, Player.Current_location);
+                Player.Monster_Encountered.Remove(Monster);
                 break;
             }
             else
@@ -69,4 +69,4 @@ public class Encounter
 
         }
     }
- }
+}

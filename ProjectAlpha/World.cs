@@ -34,10 +34,10 @@ public static class World
         "   [V][F][T][G][B][S] \n" +
         "         [H]          \n";
 
-    public static string Alchemist_quest = "Alchemist:\n“Those rats art nibbling on mine own h'rbs! I\r\ncouldst very much useth an adventur'r to taketh\r\ncareth of those folk …”";
-    public static string Farmer_quest = "Farmer:\n“I can't w'rk mine own landeth with those pesky\r\nsnakes slith'ring 'round! Shall thee holp me?”"; 
-    public static string Final_quest_Ready = "Guard:\n“thou hast profed thy grit, enter and slay those snakes”";
-    public static string Final_quest_UnReady = "Guard:\n“Turn back at once, peasant! Unless thee\r\nhast proof of thy grit.”";
+    public static string Alchemist_quest = "Alchemist:\nï¿½Those rats art nibbling on mine own h'rbs! I\r\ncouldst very much useth an adventur'r to taketh\r\ncareth of those folk ï¿½ï¿½";
+    public static string Farmer_quest = "Farmer:\nï¿½I can't w'rk mine own landeth with those pesky\r\nsnakes slith'ring 'round! Shall thee holp me?ï¿½";
+    public static string Final_quest_Ready = "Guard:\nï¿½thou hast profed thy grit, enter and slay those snakesï¿½";
+    public static string Final_quest_UnReady = "Guard:\nï¿½Turn back at once, peasant! Unless thee\r\nhast proof of thy grit.ï¿½";
     static World()
     {
         PopulateWeapons();
@@ -49,13 +49,13 @@ public static class World
 
     public static void PopulateWeapons()
     {
-        Weapons.Add(new Weapon(WEAPON_ID_RUSTY_SWORD, "Rusty sword", 5));
-        Weapons.Add(new Weapon(WEAPON_ID_CLUB, "Club", 10));
+        Weapons.Add(new Weapon(WEAPON_ID_RUSTY_SWORD, "Rusty sword", 25));
+        Weapons.Add(new Weapon(WEAPON_ID_CLUB, "Club", 50));
     }
 
     public static void PopulateMonsters()
     {
-        Monster rat = new Monster(MONSTER_ID_RAT, "rat", 1, 3, 3);
+        Monster rat = new Monster(MONSTER_ID_RAT, "rat", 15, 25, 10);
 
 
         Monster snake = new Monster(MONSTER_ID_SNAKE, "snake", 10, 7, 7);
