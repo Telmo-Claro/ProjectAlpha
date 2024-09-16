@@ -4,6 +4,7 @@ public class Player
     public Weapon Current_weapon;
     public int Current_hp;
     public int Max_hp;
+    public bool InFight;
     public Location Current_location;
     public Location Previous_Location;
     public List<Quest> Quest_List = new List<Quest> { };
@@ -40,7 +41,11 @@ public class Player
             var tmp = Console.ReadLine();
             if (tmp == "1")
             {
-                // to be implemented
+                Item item = Inventory.ChooseFromInv();
+                if (item != null)
+                {
+                    ChoosedItemMenu(item);
+                }
             }
             else if (tmp == "2")
             {
@@ -51,5 +56,49 @@ public class Player
                 break;
             }
         }
+    }
+
+    public void ChoosedItemMenu(Item item)
+    {
+        while (true)
+        {
+            if (item is not Weapon weapon)
+            {
+                Console.Clear();
+                Console.WriteLine("This item is not usable");
+                Thread.Sleep(100);
+                break;
+            }
+            else if ((item is Weapon) && BattleMode.inBattle)
+            {
+                Console.Clear();
+                Console.WriteLine("You cannot change your weapon in a fight!");
+                Thread.Sleep(1000);
+                break;
+            }
+            else if (item is Weapon)
+            {
+                Console.Clear();
+                Console.WriteLine($"Item: {item.Name}");
+                Console.WriteLine("Do you want to equip this Weapon?");
+                Console.WriteLine("Yes (1)");
+                Console.WriteLine("No (2)");
+                string tmp = Console.ReadLine();
+                if (tmp == "1") 
+                {
+                    Console.Clear();
+                    Console.WriteLine($"You have equiped {item.Name}");
+                    Current_weapon = weapon;
+                    Thread.Sleep(800);
+                    break;
+                }
+                else if(tmp == "2") 
+                {
+                    break;
+                }
+
+            }
+        }
+        InvMenu();
     }
 }
