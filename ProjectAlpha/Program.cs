@@ -82,7 +82,7 @@ public class Program
                 {
                     Console.Clear();
                     mc.Monster_Encountered.Add(mc.Current_location.MonsterLivingHere);
-                    Encounter monster = new Encounter(mc, mc.Current_location.MonsterLivingHere);
+                    Encounter monster = new Encounter(mc.Current_location.MonsterLivingHere, mc);
                     monster.choice();
                     break;
                 }
