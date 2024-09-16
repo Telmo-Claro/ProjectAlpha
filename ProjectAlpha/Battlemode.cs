@@ -4,6 +4,7 @@ public class BattleMode
 {
     public int damageByMonster;
     public int damageByPlayer;
+    public static bool inBattle;
     public Monster Monsterrawr;
     public Player Playerrawr;
     public Weapon Weapon;
@@ -13,12 +14,12 @@ public class BattleMode
         this.Monsterrawr = monster;
         this.Playerrawr = player;
         this.Weapon = player.Current_weapon;
+        inBattle = true;
     }
 
     public void BattleMenu()
     {
         Console.WriteLine($"You encountered a {Monsterrawr.Name}!");
-        bool inBattle = true;
 
         while (Playerrawr.Current_hp > 0 && inBattle)
         {

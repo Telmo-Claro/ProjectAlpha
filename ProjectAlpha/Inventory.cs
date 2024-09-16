@@ -20,5 +20,31 @@
             Sort = true;
         }
     }
+
+    public Item ChooseFromInv()
+    {
+        while (true)
+        {
+            Console.Clear();
+            Console.WriteLine("Inventory");
+            Console.WriteLine("---------");
+            for (int i = 0; i < Items.Count; i++)
+            {
+                Console.WriteLine($"{i + 1}. {Items[i].Name}");
+            }
+            Console.WriteLine("Exit (0)");
+            Console.WriteLine("Choose Item Number: ");
+            int tmp = Convert.ToInt32(Console.ReadLine());
+            if (tmp == 0)
+            {
+                return null;
+            }
+            else if ((tmp > 0) | (tmp <= Items.Count))
+            {
+                return Items[tmp - 1];
+            }
+            
+        }
+    }
 }
 
