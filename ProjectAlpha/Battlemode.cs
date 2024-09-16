@@ -74,8 +74,9 @@ public class BattleMode
                     break;
 
                 case "3":
+                    // Opens inventory
                     Console.WriteLine("Opening inventory...");
-                    // Inventory logic can go here
+                    Playerrawr.InvMenu();
                     break;
 
                 case "4":

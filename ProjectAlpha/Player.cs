@@ -9,6 +9,7 @@ public class Player
     public List<Quest> Quest_List = new List<Quest> { };
     public List<Quest> Done_Quests = new List<Quest>() { };
     public List<Monster> Monster_Encountered = new List<Monster>() { };
+    public Inventory Inventory = new Inventory();
 
     public Player(string name, Weapon current_weapon, int current_hp, int max_hp, Location current_location)
     {
@@ -17,5 +18,38 @@ public class Player
         this.Current_hp = current_hp;
         this.Max_hp = max_hp;
         this.Current_location = current_location;
+        Inventory.Items.Add(Current_weapon);
+    }
+
+    public void InvMenu()
+    {
+        while (true)
+        {
+            Console.Clear();
+            Console.WriteLine("Inventory");
+            Console.WriteLine("---------");
+            Console.WriteLine($"Current Weapon: {Current_weapon.Name}");
+            Console.WriteLine("---------");
+            for (int i = 0; i < Inventory.Items.Count; i++)
+            {
+                Console.WriteLine($"{i + 1}. {Inventory.Items[i].Name}");
+            }
+            Console.WriteLine("Choose Item (1)");
+            Console.WriteLine("Sort A-Z/Z-A (2)");
+            Console.WriteLine("Exit (3)");
+            var tmp = Console.ReadLine();
+            if (tmp == "1")
+            {
+                // to be implemented
+            }
+            else if (tmp == "2")
+            {
+                Inventory.InvSort();
+            }
+            else if (tmp == "3")
+            {
+                break;
+            }
+        }
     }
 }
