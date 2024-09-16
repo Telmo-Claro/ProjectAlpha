@@ -62,11 +62,11 @@ public class BattleMode
         }
     }
 
-    public int RandomDamage(int maxDamage, int minDamage = 0)
+    public int RandomDamage(int minDamage, int maxDamage)
     {
         // simple random damage returner
         Random rng = new Random();
-        int rand = rng.Next(0, maxDamage);
+        int rand = rng.Next(minDamage, maxDamage);
         return rand;
     }
 
