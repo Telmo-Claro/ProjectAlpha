@@ -129,6 +129,7 @@ public class Program
             }
             else if (Choice == "3")
             {
+                mc.InvMenu();
             }
             else if (Choice == "4")
             {
