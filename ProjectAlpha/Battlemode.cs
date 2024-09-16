@@ -17,7 +17,6 @@ public class BattleMode
 
     public void BattleMenu()
     {
-        Console.Clear();
         Console.WriteLine($"You encountered a {Monsterrawr.Name}!");
 
         while (Playerrawr.Current_hp > 0)
@@ -31,35 +30,46 @@ public class BattleMode
             }
 
             Console.WriteLine("What would you like to do?");
-            Console.WriteLine($"(1) Attack\n(2) Flee\n(3) Look at inventory\n(4) Quit game");
-            if (Console.ReadLine() == "1")
+            Console.WriteLine("(1) Attack\n(2) Flee\n(3) Look at inventory\n(4) Quit game");
+
+            // Get the player input once and use it in the switch statement
+            string? playerChoice = Console.ReadLine();
+
+            switch (playerChoice)
             {
-                damage = RandomDamage(0, Weapon.maximumDamage);
-                Console.WriteLine($"You hit {Monsterrawr.Name} for {damage}");
-                Monsterrawr.CurrentHitPoints -= damage;
-            }
-            else if (Console.ReadLine() == "2")
-            {
-                BattleModeFlee();
-                break;
-            }
-            else if (Console.ReadLine() == "3")
-            {
-                //inventory open
-            }
-            else if (Console.ReadLine() == "4")
-            {
-                System.Environment.Exit(0);
+                case "1":
+                    damage = RandomDamage(0, Weapon.maximumDamage);
+                    Console.WriteLine($"You hit {Monsterrawr.Name} for {damage}");
+                    Monsterrawr.CurrentHitPoints -= damage;
+                    continue;
+
+                case "2":
+                    BattleModeFlee();
+                    break;
+
+                case "3":
+                    // Inventory open logic here
+                    Console.WriteLine("Opening inventory...");
+                    continue;
+
+                case "4":
+                    System.Environment.Exit(0);
+                    break;
+
+                default:
+                    Console.WriteLine("Wrong input!");
+                    continue;
             }
 
-            else
-            {
-                Console.WriteLine("Wrong input!");
-            }
+            if (playerChoice == "2")
+                break;
+
+            // Monster attacks the player
             damage = RandomDamage(0, Monsterrawr.MaximumDamage);
             Console.WriteLine($"The {Monsterrawr.Name} hit you for {damage}");
             Playerrawr.Current_hp -= damage;
         }
+
     }
 
     public int RandomDamage(int minDamage, int maxDamage)
