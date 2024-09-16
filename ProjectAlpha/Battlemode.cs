@@ -41,7 +41,7 @@ public class BattleMode
             else if (Console.ReadLine() == "2")
             {
                 BattleModeFlee();
-                return;
+                break;
             }
             else if (Console.ReadLine() == "3")
             {
