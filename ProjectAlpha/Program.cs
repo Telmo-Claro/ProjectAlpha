@@ -39,7 +39,7 @@ public class Program
                 {
                     Console.Clear();
                     Console.WriteLine($"{World.Final_quest_UnReady}\n");
-                    Console.WriteLine("Back (1)");
+                    Console.WriteLine("(1) Back");
                     string tmp2 = Console.ReadLine();
                     if (tmp2 == "1")
                     {
@@ -56,7 +56,7 @@ public class Program
                     Console.Clear();
                     Console.WriteLine($"{mc.Current_location.QuestAvailableHere.BeginDialogue}\n");
                     Console.WriteLine("Do you accept this quest?");
-                    Console.WriteLine("Yes (1)\nNo (2)");
+                    Console.WriteLine("(1) Yes\n(2) No");
                     string tmp = Console.ReadLine();
                     if (tmp == "1")
                     {
@@ -90,10 +90,10 @@ public class Program
             // start menu
             Console.Clear();
             Console.WriteLine($"Location: {mc.Current_location.Name}\n{mc.Current_location.Description}\n");
-            Console.WriteLine("Move (1)");
-            Console.WriteLine("Quests (2)");
-            Console.WriteLine("Inventory (3)");
-            Console.WriteLine("Quit (4)");
+            Console.WriteLine("(1) Move");
+            Console.WriteLine("(2) Quests");
+            Console.WriteLine("(3) Inventory");
+            Console.WriteLine("(4) Quit");
 
             string Choice = Console.ReadLine();
             if (Choice == "1")
@@ -118,7 +118,7 @@ public class Program
                         Console.WriteLine("You have no active quests!");
                     }
 
-                    Console.WriteLine("\nBack (1)");
+                    Console.WriteLine("\n(1) Back");
                     string Back = Console.ReadLine();
                     if (Back == "1")
                     {
@@ -142,19 +142,19 @@ public class Program
                 Console.WriteLine($"Location: {mc.Current_location.Name}\n{mc.Current_location.Description}\n\nFrom here you can go:\n");
                 if (mc.Current_location.LocationToNorth is not null)
                 {
-                    Console.WriteLine($"North (1): {mc.Current_location.LocationToNorth.Name}");
+                    Console.WriteLine($"(1) North: {mc.Current_location.LocationToNorth.Name}");
                 }
                 if (mc.Current_location.LocationToSouth is not null)
                 {
-                    Console.WriteLine($"South (2): {mc.Current_location.LocationToSouth.Name}");
+                    Console.WriteLine($"(2) South: {mc.Current_location.LocationToSouth.Name}");
                 }
                 if (mc.Current_location.LocationToWest is not null)
                 {
-                    Console.WriteLine($"West (3): {mc.Current_location.LocationToWest.Name}");
+                    Console.WriteLine($"(3) West: {mc.Current_location.LocationToWest.Name}");
                 }
                 if (mc.Current_location.LocationToEast is not null)
                 {
-                    Console.WriteLine($"East (4): {mc.Current_location.LocationToEast.Name}");
+                    Console.WriteLine($"(4) East: {mc.Current_location.LocationToEast.Name}");
                 }
 
                 Console.WriteLine("\n" + World.map);

@@ -36,7 +36,7 @@ public class BattleMode
             }
             Console.WriteLine($"Your HP: {Playerrawr.Current_hp}");
             Console.WriteLine("What would you like to do?");
-            Console.WriteLine("Attack (1)\nFlee (2)\nLook at inventory (3)\nQuit game (4)");
+            Console.WriteLine("(1) Attack\n(2) Flee\n(3) Look at inventory\n(4) Quit game");
 
             // Get player input
             string? playerChoice = Console.ReadLine();
