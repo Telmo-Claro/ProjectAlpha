@@ -35,9 +35,9 @@ public class Player
             {
                 Console.WriteLine($"{i + 1}. {Inventory.Items[i].Name}");
             }
-            Console.WriteLine("Choose Item (1)");
-            Console.WriteLine("Sort A-Z/Z-A (2)");
-            Console.WriteLine("Exit (3)");
+            Console.WriteLine("(1) Choose Item");
+            Console.WriteLine("(2) Sort A-Z/Z-A");
+            Console.WriteLine("(3) Exit");
             var tmp = Console.ReadLine();
             if (tmp == "1")
             {
@@ -81,8 +81,8 @@ public class Player
                 Console.Clear();
                 Console.WriteLine($"Item: {item.Name}");
                 Console.WriteLine("Do you want to equip this Weapon?");
-                Console.WriteLine("Yes (1)");
-                Console.WriteLine("No (2)");
+                Console.WriteLine("(1) Yes");
+                Console.WriteLine("(2) No");
                 string tmp = Console.ReadLine();
                 if (tmp == "1") 
                 {
