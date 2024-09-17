@@ -49,19 +49,19 @@ public static class World
 
     public static void PopulateWeapons()
     {
-        Weapons.Add(new Weapon(WEAPON_ID_RUSTY_SWORD, "Rusty sword", 25));
+        Weapons.Add(new Weapon(WEAPON_ID_RUSTY_SWORD, "Rusty sword", 15));
         Weapons.Add(new Weapon(WEAPON_ID_CLUB, "Club", 50));
     }
 
     public static void PopulateMonsters()
     {
-        Monster rat = new Monster(MONSTER_ID_RAT, "rat", 15, 25, 10);
+        Monster rat = new Monster(MONSTER_ID_RAT, "rat", 15, 25, 25);
 
 
         Monster snake = new Monster(MONSTER_ID_SNAKE, "snake", 10, 7, 7);
 
 
-        Monster giantSpider = new Monster(MONSTER_ID_GIANT_SPIDER, "giant spider", 3, 10, 10);
+        Monster giantSpider = new Monster(MONSTER_ID_GIANT_SPIDER, "giant spider", 3, 200, 200);
 
 
         Monsters.Add(rat);
