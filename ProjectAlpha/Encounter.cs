@@ -20,7 +20,7 @@ public class Encounter
         {
             Console.WriteLine($"{Player.Name} watch out! There is danger ahead!");
             Console.WriteLine("How do you wish to proceed:");
-            Console.Write("1) Attack\n2) Sneak\n3) Flee\n> ");
+            Console.Write("Attack (1)\nSneak (2)\nFlee (3)\n> ");
             int choice = Convert.ToInt32(Console.ReadLine());
 
             if (choice == 1)
