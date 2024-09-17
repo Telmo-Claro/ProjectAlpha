@@ -29,8 +29,9 @@ public class BattleMode
             if (Monsterrawr.CurrentHitPoints <= 0)
             {
                 Console.WriteLine($"Your HP: {Playerrawr.Current_hp}");
-                Console.WriteLine($"You have defeated the {Monsterrawr.Name}!");
+                Console.WriteLine($"You have defeated the {Monsterrawr.Name}! Press any key to continue");
                 inBattle = false;  // End the battle loop
+                Console.ReadLine();
                 continue;
             }
             Console.WriteLine($"Your HP: {Playerrawr.Current_hp}");
@@ -51,8 +52,9 @@ public class BattleMode
                     // Check if the monster is defeated after player's attack
                     if (Monsterrawr.CurrentHitPoints <= 0)
                     {
-                        Console.WriteLine($"You have defeated the {Monsterrawr.Name}!");
+                        Console.WriteLine($"You have defeated the {Monsterrawr.Name}! Press any key to continue");
                         inBattle = false;  // End the battle
+                        Console.ReadLine();
                         continue;
                     }
 

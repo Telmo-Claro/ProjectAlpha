@@ -5,7 +5,6 @@ public class Program
         string? name;
         Player mc;
         bool MoveLoop = false;
-
         // name loop
         while (true)
         {
@@ -89,7 +88,7 @@ public class Program
             }
 
             // start menu
-            // Console.Clear();
+            Console.Clear();
             Console.WriteLine($"Location: {mc.Current_location.Name}\n{mc.Current_location.Description}\n");
             Console.WriteLine("Move (1)");
             Console.WriteLine("Quests (2)");
