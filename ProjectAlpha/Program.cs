@@ -6,7 +6,7 @@ public class Program
         Player mc;
         bool MoveLoop = false;
         // name loop
-        while (true )
+        while (true)
         {
             Console.WriteLine("Hey, what is your name?");
             name = Console.ReadLine();
