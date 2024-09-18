@@ -2,18 +2,17 @@ public class Program
 {
     public static void Main()
     {
-        string name;
+        string? name;
         Player mc;
         bool MoveLoop = false;
-
         // name loop
-        while (true)
+        while (true )
         {
             Console.WriteLine("Hey, what is your name?");
             name = Console.ReadLine();
             if (name is not null)
             {
-                mc = new Player(name, "Rusty sword", 50, 50, World.Locations[0]);
+                mc = new Player(name, World.WeaponByID(World.WEAPON_ID_RUSTY_SWORD), 50, 50, World.Locations[0]);
                 Console.Clear();
                 Console.WriteLine($"Greetings, {name}\n");
                 Thread.Sleep(1000);
@@ -33,14 +32,14 @@ public class Program
         {
             // checks for when you enter a new location / updates
 
-                    // check for the final boss, first defeat 2 previous quests
+            // check for the final boss, first defeat 2 previous quests
             if ((mc.Current_location == World.LocationByID(World.LOCATION_ID_GUARD_POST)) && ((!mc.Quest_List.Contains(World.QuestByID(World.QUEST_ID_CLEAR_ALCHEMIST_GARDEN))) && (!mc.Quest_List.Contains(World.QuestByID(World.QUEST_ID_CLEAR_FARMERS_FIELD)))))
             {
                 while (true)
                 {
                     Console.Clear();
                     Console.WriteLine($"{World.Final_quest_UnReady}\n");
-                    Console.WriteLine("Back (1)");
+                    Console.WriteLine("(1) Back");
                     string tmp2 = Console.ReadLine();
                     if (tmp2 == "1")
                     {
@@ -49,7 +48,7 @@ public class Program
                     }
                 }
             }
-                    // checks for quests
+            // checks for quests
             if ((mc.Current_location.QuestAvailableHere is not null) && (!mc.Quest_List.Contains(mc.Current_location.QuestAvailableHere)))
             {
                 while (true)
@@ -57,7 +56,7 @@ public class Program
                     Console.Clear();
                     Console.WriteLine($"{mc.Current_location.QuestAvailableHere.BeginDialogue}\n");
                     Console.WriteLine("Do you accept this quest?");
-                    Console.WriteLine("Yes (1)\nNo (2)");
+                    Console.WriteLine("(1) Yes\n(2) No");
                     string tmp = Console.ReadLine();
                     if (tmp == "1")
                     {
@@ -72,16 +71,43 @@ public class Program
                         (mc.Current_location, mc.Previous_Location) = (mc.Previous_Location, mc.Current_location);
                         break;
                     }
-                } 
+                }
+            }
+
+            // encounter monster in non-friendly areas if quest active.
+            if ((mc.Current_location.MonsterLivingHere is not null) && (!mc.Monster_Encountered.Contains(mc.Current_location.MonsterLivingHere)))
+            {
+                while (true)
+                {
+                    Console.Clear();
+                    mc.Monster_Encountered.Add(mc.Current_location.MonsterLivingHere);
+                    Encounter monster = new Encounter(mc.Current_location.MonsterLivingHere, mc);
+                    monster.choice();
+                    break;
+                }
+            }
+
+            // Checks if player is in a non-friendly area and loads a chance of the goblin to appear.
+            if (!mc.Monster_Encountered.Contains(World.MonsterByID(World.MONSTER_ID_GOBLIN_THIEF)))
+            {
+                // make goblin-class object
+                GoblinEncounter goblin = new GoblinEncounter(mc);
+                if (goblin.ChanceOfEncounter() && !mc.Current_location.Friendly)
+                {
+                    Console.Clear();
+                    mc.Monster_Encountered.Add(World.MonsterByID(World.MONSTER_ID_GOBLIN_THIEF));
+                    goblin.IntoBattle();
+                }
+
             }
 
             // start menu
             Console.Clear();
             Console.WriteLine($"Location: {mc.Current_location.Name}\n{mc.Current_location.Description}\n");
-            Console.WriteLine("Move (1)");
-            Console.WriteLine("Quests (2)");
-            Console.WriteLine("Inventory (3)");
-            Console.WriteLine("Quit (4)");
+            Console.WriteLine("(1) Move");
+            Console.WriteLine("(2) Quests");
+            Console.WriteLine("(3) Inventory");
+            Console.WriteLine("(4) Quit");
 
             string Choice = Console.ReadLine();
             if (Choice == "1")
@@ -90,7 +116,7 @@ public class Program
             }
             else if (Choice == "2")
             {
-                while (true) 
+                while (true)
                 {
                     Console.Clear();
                     Console.WriteLine($"Quests: ");
@@ -106,7 +132,7 @@ public class Program
                         Console.WriteLine("You have no active quests!");
                     }
 
-                    Console.WriteLine("\nBack (1)");
+                    Console.WriteLine("\n(1) Back\n> ");
                     string Back = Console.ReadLine();
                     if (Back == "1")
                     {
@@ -116,6 +142,7 @@ public class Program
             }
             else if (Choice == "3")
             {
+                mc.InvMenu();
             }
             else if (Choice == "4")
             {
@@ -129,19 +156,19 @@ public class Program
                 Console.WriteLine($"Location: {mc.Current_location.Name}\n{mc.Current_location.Description}\n\nFrom here you can go:\n");
                 if (mc.Current_location.LocationToNorth is not null)
                 {
-                    Console.WriteLine($"North (1): {mc.Current_location.LocationToNorth.Name}");
+                    Console.WriteLine($"(1) North: {mc.Current_location.LocationToNorth.Name}");
                 }
                 if (mc.Current_location.LocationToSouth is not null)
                 {
-                    Console.WriteLine($"South (2): {mc.Current_location.LocationToSouth.Name}");
+                    Console.WriteLine($"(2) South: {mc.Current_location.LocationToSouth.Name}");
                 }
                 if (mc.Current_location.LocationToWest is not null)
                 {
-                    Console.WriteLine($"West (3): {mc.Current_location.LocationToWest.Name}");
+                    Console.WriteLine($"(3) West: {mc.Current_location.LocationToWest.Name}");
                 }
                 if (mc.Current_location.LocationToEast is not null)
                 {
-                    Console.WriteLine($"East (4): {mc.Current_location.LocationToEast.Name}");
+                    Console.WriteLine($"(4) East: {mc.Current_location.LocationToEast.Name}");
                 }
 
                 Console.WriteLine("\n" + World.map);
