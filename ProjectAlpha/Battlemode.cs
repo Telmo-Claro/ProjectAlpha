@@ -8,6 +8,7 @@ public class BattleMode
     public Monster Monsterrawr;
     public Player Playerrawr;
     public Weapon Weapon;
+    public int roundCount = 0;
 
     public BattleMode(Monster monster, Player player)
     {
@@ -24,6 +25,20 @@ public class BattleMode
         while (Playerrawr.Current_hp > 0 && inBattle)
         {
             int damage = 0;
+
+            // Round counter for the goblin + 3 round max
+            GoblinEncounter goblin = new(Playerrawr);
+
+            if (Monsterrawr == goblin.Goblin)
+            {
+                if (roundCount == 3)
+                {
+                    Console.Write($"{goblin.Goblin.Name} has ran away with your items!\n " + Playerrawr.Name + "! Try to defeat it in 3 rounds next time!\n");
+                    inBattle = false;
+                    break;
+                }
+                roundCount++;
+            }
 
             // Check if the monster is already dead at the start of the loop
             if (Monsterrawr.CurrentHitPoints <= 0)
@@ -73,6 +88,14 @@ public class BattleMode
 
                 case "2":
                     // Player flees from battle
+
+                    // if goblin, no flee allowed
+                    if (Monsterrawr == goblin.Goblin)
+                    {
+                        Console.WriteLine($"{Playerrawr.Name}, you can't escape the magnificient Goblin!");
+                        break;
+                    }
+
                     BattleModeFlee();
                     inBattle = false;  // Exit the battle after fleeing
                     break;

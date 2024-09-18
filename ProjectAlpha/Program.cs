@@ -6,7 +6,7 @@ public class Program
         Player mc;
         bool MoveLoop = false;
         // name loop
-        while (true)
+        while (true )
         {
             Console.WriteLine("Hey, what is your name?");
             name = Console.ReadLine();
@@ -74,7 +74,7 @@ public class Program
                 }
             }
 
-            // encounter monster the monster in non-friendly areas
+            // encounter monster in non-friendly areas if quest active.
             if ((mc.Current_location.MonsterLivingHere is not null) && (!mc.Monster_Encountered.Contains(mc.Current_location.MonsterLivingHere)))
             {
                 while (true)
@@ -85,6 +85,20 @@ public class Program
                     monster.choice();
                     break;
                 }
+            }
+
+            // Checks if player is in a non-friendly area and loads a chance of the goblin to appear.
+            if (!mc.Monster_Encountered.Contains(World.MonsterByID(World.MONSTER_ID_GOBLIN_THIEF)))
+            {
+                // make goblin-class object
+                GoblinEncounter goblin = new GoblinEncounter(mc);
+                if (goblin.ChanceOfEncounter() && !mc.Current_location.Friendly)
+                {
+                    Console.Clear();
+                    mc.Monster_Encountered.Add(World.MonsterByID(World.MONSTER_ID_GOBLIN_THIEF));
+                    goblin.IntoBattle();
+                }
+
             }
 
             // start menu
@@ -118,7 +132,7 @@ public class Program
                         Console.WriteLine("You have no active quests!");
                     }
 
-                    Console.WriteLine("\n(1) Back");
+                    Console.WriteLine("\n(1) Back\n> ");
                     string Back = Console.ReadLine();
                     if (Back == "1")
                     {
