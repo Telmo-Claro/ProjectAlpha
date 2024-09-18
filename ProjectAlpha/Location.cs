@@ -9,6 +9,7 @@ public class Location
     public Location LocationToWest = null;
     public Quest QuestAvailableHere = null;
     public Monster MonsterLivingHere = null;
+    public bool Friendly = false;
 
     public Location(int id, string name, string description)
     {
