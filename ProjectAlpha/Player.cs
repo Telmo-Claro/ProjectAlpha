@@ -62,12 +62,28 @@ public class Player
     {
         while (true)
         {
-            if (item is not Weapon weapon)
+            if (item is Potion potion)
             {
                 Console.Clear();
-                Console.WriteLine("This item is not usable");
-                Thread.Sleep(100);
-                break;
+                Console.WriteLine($"Item: {item.Name}");
+                Console.WriteLine("Do you want to use this Potion?");
+                Console.WriteLine("(1) Yes");
+                Console.WriteLine("(2) No");
+                string tmp = Console.ReadLine();
+                if (tmp == "1")
+                {
+                    Console.Clear();
+                    Console.WriteLine($"You have used {item.Name}");
+                    Console.WriteLine($"+ {potion.HealthPoints}");
+                    Current_hp += potion.HealthPoints;
+                    Inventory.Items.Remove(potion);
+                    Thread.Sleep(1600);
+                    break;
+                }
+                else if (tmp == "2")
+                {
+                    break;
+                }
             }
             else if ((item is Weapon) && BattleMode.inBattle)
             {
@@ -76,7 +92,7 @@ public class Player
                 Thread.Sleep(1000);
                 break;
             }
-            else if (item is Weapon)
+            else if (item is Weapon weapon)
             {
                 Console.Clear();
                 Console.WriteLine($"Item: {item.Name}");
@@ -99,6 +115,5 @@ public class Player
 
             }
         }
-        InvMenu();
     }
 }
