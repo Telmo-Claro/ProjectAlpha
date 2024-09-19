@@ -12,6 +12,7 @@ public class GoblinEncounter
     public Monster Goblin = World.MonsterByID(World.MONSTER_ID_GOBLIN_THIEF);
     public Player Player;
     public int rounds = 0;
+    public Inventory Inventory = new Inventory();
 
     public GoblinEncounter(Player argPlayer)   
     {
@@ -42,10 +43,4 @@ public class GoblinEncounter
             Battle.BattleMenu();
         }
     }
-
-    public void StealItems()
-    {
-
-    }
-
 }

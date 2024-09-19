@@ -8,7 +8,7 @@ public class BattleMode
     public Monster Monsterrawr;
     public Player Playerrawr;
     public Weapon Weapon;
-    public int roundCount = 0;
+    public int roundCount = 1;
 
     public BattleMode(Monster monster, Player player)
     {
@@ -25,18 +25,47 @@ public class BattleMode
         while (Playerrawr.Current_hp > 0 && inBattle)
         {
             int damage = 0;
-
-            // Round counter for the goblin + 3 round max
             GoblinEncounter goblin = new(Playerrawr);
-
+            Console.WriteLine("Round: " + roundCount);
             if (Monsterrawr == goblin.Goblin)
             {
-                if (roundCount == 3)
+                int playerInventoryLenght = Playerrawr.Inventory.Items.Count();
+                Random random = new Random();
+
+                if (roundCount == 4)
                 {
-                    Console.Write($"{goblin.Goblin.Name} has ran away with your items!\n " + Playerrawr.Name + "! Try to defeat it in 3 rounds next time!\n");
+                    Console.Write($"{goblin.Goblin.Name} has ran away with your items!\n" + Playerrawr.Name + "! Try to defeat it in 3 rounds next time!\n");
+                    Console.ReadKey();
                     inBattle = false;
                     break;
                 }
+
+                //steals an item every round
+                if (Playerrawr.Inventory.Items.Count() is not 0) 
+                { 
+                    int itemToSteal = random.Next(0, playerInventoryLenght - 1);
+                    Item itemStolen = Playerrawr.Inventory.Items[itemToSteal];
+                    goblin.Inventory.Items.Add(itemStolen);
+                    Playerrawr.Inventory.Items.RemoveAt(itemToSteal);
+                    Console.WriteLine($"{goblin.Goblin.Name} has stolen {itemStolen.Name} from you!");
+                    Console.ReadKey();
+                }
+
+
+                // if goblin dies, items go back to player
+                if (Monsterrawr.CurrentHitPoints <= 0) 
+                {
+                    for (int i = 0; i < goblin.Inventory.Items.Count(); i++) 
+                    {
+                        Item itemBack = Playerrawr.Inventory.Items[i];
+                        goblin.Inventory.Items.RemoveAt(i);
+                        Playerrawr.Inventory.Items.Add(itemBack);
+                    }
+                    Console.ReadKey();
+                }
+
+                // line separates the rounds
+                Console.WriteLine("------------------------------------------------------------");
                 roundCount++;
             }
 
