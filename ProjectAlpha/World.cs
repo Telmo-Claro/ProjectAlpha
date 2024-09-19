@@ -9,6 +9,9 @@ public static class World
 
     public const int WEAPON_ID_RUSTY_SWORD = 1;
     public const int WEAPON_ID_CLUB = 2;
+    public const int WEAPON_ID_AXE = 3;
+    public const int WEAPON_ID_MACE = 4;
+    public const int WEAPON_ID_SPEAR = 5;
 
     public const int MONSTER_ID_RAT = 1;
     public const int MONSTER_ID_SNAKE = 2;
@@ -57,6 +60,10 @@ public static class World
     {
         Weapons.Add(new Weapon(WEAPON_ID_RUSTY_SWORD, "Rusty sword", 15));
         Weapons.Add(new Weapon(WEAPON_ID_CLUB, "Purple Club", 50));
+        Weapons.Add(new Weapon(WEAPON_ID_AXE, "Axe", 80));
+        Weapons.Add(new Weapon(WEAPON_ID_MACE, "Mace", 75));
+        Weapons.Add(new Weapon(WEAPON_ID_SPEAR, "Spear", 30));
+
     }
 
     public static void PopulateMonsters()
