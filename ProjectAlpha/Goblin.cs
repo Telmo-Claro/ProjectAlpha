@@ -23,7 +23,7 @@ public class GoblinEncounter
     {
         Random rand = new Random();
         double randResult = rand.NextDouble();
-        if (randResult <= 0.30)
+        if (randResult <= 0.15)
         {
             return true;
         }

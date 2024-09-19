@@ -40,11 +40,15 @@ public static class World
     public static string Farmer_quest = "Farmer:\n�I can't w'rk mine own landeth with those pesky\r\nsnakes slith'ring 'round! Shall thee holp me?�";
     public static string Final_quest_Ready = "Guard:\n�thou hast profed thy grit, enter and slay those snakes�";
     public static string Final_quest_UnReady = "Guard:\n�Turn back at once, peasant! Unless thee\r\nhast proof of thy grit.�";
+    // this is to be changed ofc
+    public static string Alchemist_quest_end = "Here have Leen!";
+    public static string Farmer_quest_end = "Thank you for killing of those pesky rats! \nTake this Weird looking purple club i have found in the showers of Los Angeles Police Department";
+    public static string Final_quest_end = "You won epic";
     static World()
     {
         PopulateWeapons();
-        PopulateMonsters();
         PopulateQuests();
+        PopulateMonsters();
         PopulateLocations();
     }
 
@@ -52,21 +56,21 @@ public static class World
     public static void PopulateWeapons()
     {
         Weapons.Add(new Weapon(WEAPON_ID_RUSTY_SWORD, "Rusty sword", 15));
-        Weapons.Add(new Weapon(WEAPON_ID_CLUB, "Club", 50));
+        Weapons.Add(new Weapon(WEAPON_ID_CLUB, "Purple Club", 50));
     }
 
     public static void PopulateMonsters()
     {
-        Monster rat = new Monster(MONSTER_ID_RAT, "Rat", 15, 25, 25);
+        Monster rat = new Monster(MONSTER_ID_RAT, "Rat", 15, 25, 25, QuestByID(QUEST_ID_CLEAR_ALCHEMIST_GARDEN));
 
 
-        Monster snake = new Monster(MONSTER_ID_SNAKE, "Snake", 10, 7, 7);
+        Monster snake = new Monster(MONSTER_ID_SNAKE, "Snake", 10, 7, 7, QuestByID(QUEST_ID_CLEAR_FARMERS_FIELD));
 
 
-        Monster giantSpider = new Monster(MONSTER_ID_GIANT_SPIDER, "Giant Spider", 3, 200, 200);
+        Monster giantSpider = new Monster(MONSTER_ID_GIANT_SPIDER, "Giant Spider", 3, 200, 200, QuestByID(QUEST_ID_COLLECT_SPIDER_SILK));
 
 
-        Monster goblinThief = new Monster(MONSTER_ID_GOBLIN_THIEF, "Carlo The Goblin Thief", 2, 50, 50);
+        Monster goblinThief = new Monster(MONSTER_ID_GOBLIN_THIEF, "Carlo The Goblin Thief", 2, 50, 50, null);
 
 
         Monsters.Add(rat);
@@ -106,6 +110,15 @@ public static class World
         clearAlchemistGarden.BeginDialogue = Alchemist_quest;
         clearFarmersField.BeginDialogue = Farmer_quest;
         clearSpidersForest.BeginDialogue = Final_quest_Ready;
+
+        clearAlchemistGarden.EndDialogue = Alchemist_quest_end;
+        clearFarmersField.EndDialogue = Farmer_quest_end;
+        clearSpidersForest.EndDialogue = Final_quest_end;
+
+        // adds rewards to quests
+
+        clearAlchemistGarden.Reward = new Potion(1, "Health Potion", 20);
+        clearFarmersField.Reward = WeaponByID(WEAPON_ID_CLUB);
     }
 
     public static void PopulateLocations()
