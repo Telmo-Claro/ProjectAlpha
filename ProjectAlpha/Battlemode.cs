@@ -74,6 +74,7 @@ public class BattleMode
             {
                 Console.WriteLine($"Your HP: {Playerrawr.Current_hp}");
                 Console.WriteLine($"You have defeated the {Monsterrawr.Name}! Press any key to continue");
+                Playerrawr.Done_Quests.Add(Monsterrawr.Quest);
                 inBattle = false;  // End the battle loop
                 Console.ReadLine();
                 continue;
@@ -97,6 +98,7 @@ public class BattleMode
                     if (Monsterrawr.CurrentHitPoints <= 0)
                     {
                         Console.WriteLine($"You have defeated the {Monsterrawr.Name}! Press any key to continue");
+                        Playerrawr.Done_Quests.Add(Monsterrawr.Quest);
                         inBattle = false;  // End the battle
                         Console.ReadLine();
                         continue;

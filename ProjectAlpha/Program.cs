@@ -34,7 +34,7 @@ public class Program
             // checks for when you enter a new location / updates
 
             // check for the final boss, first defeat 2 previous quests
-            if ((mc.Current_location == World.LocationByID(World.LOCATION_ID_GUARD_POST)) && ((!mc.Quest_List.Contains(World.QuestByID(World.QUEST_ID_CLEAR_ALCHEMIST_GARDEN))) && (!mc.Quest_List.Contains(World.QuestByID(World.QUEST_ID_CLEAR_FARMERS_FIELD)))))
+            if ((mc.Current_location == World.LocationByID(World.LOCATION_ID_GUARD_POST)) && ((!mc.Done_Quests.Contains(World.QuestByID(World.QUEST_ID_CLEAR_ALCHEMIST_GARDEN))) && (!mc.Done_Quests.Contains(World.QuestByID(World.QUEST_ID_CLEAR_FARMERS_FIELD)))))
             {
                 while (true)
                 {
@@ -49,8 +49,8 @@ public class Program
                     }
                 }
             }
-            // checks for quests
-            if ((mc.Current_location.QuestAvailableHere is not null) && (!mc.Quest_List.Contains(mc.Current_location.QuestAvailableHere)))
+            // checks for accepting quests
+            if ((mc.Current_location.QuestAvailableHere is not null) && (!mc.Quest_List.Contains(mc.Current_location.QuestAvailableHere)) && (!mc.Done_Quests.Contains(mc.Current_location.QuestAvailableHere)))
             {
                 while (true)
                 {
@@ -74,7 +74,23 @@ public class Program
                     }
                 }
             }
-
+            // checks for returning quests
+            if ((mc.Quest_List.Contains(mc.Current_location.QuestAvailableHere) && (mc.Done_Quests.Contains(mc.Current_location.QuestAvailableHere))))
+            {
+                while (true)
+                {
+                    Console.Clear();
+                    Console.WriteLine($"{mc.Current_location.QuestAvailableHere.EndDialogue}\n");
+                    Console.WriteLine($"You have recieved: {mc.Current_location.QuestAvailableHere.Reward.Name}");
+                    Console.WriteLine("Press any key to continue...");
+                    Console.ReadKey();
+                    
+                    mc.Quest_List.Remove(mc.Current_location.QuestAvailableHere);
+                    mc.Inventory.Items.Add(mc.Current_location.QuestAvailableHere.Reward);
+                    Thread.Sleep(1000);
+                    break;
+                }
+            }
             // encounter monster in non-friendly areas if quest active.
             if ((mc.Current_location.MonsterLivingHere is not null) && (!mc.Monster_Encountered.Contains(mc.Current_location.MonsterLivingHere)))
             {

@@ -11,6 +11,7 @@ public class Quest
     public string Description;
     public string BeginDialogue;
     public string EndDialogue;
+    public Item Reward;
 
     public Quest(int id, string name, string description)
     {
