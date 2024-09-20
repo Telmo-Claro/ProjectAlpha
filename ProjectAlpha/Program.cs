@@ -74,6 +74,24 @@ public class Program
                     }
                 }
             }
+            // check for returning Final Quest
+            if (mc.Done_Quests.Contains(mc.Current_location.QuestAvailableHere) && (mc.Current_location == World.LocationByID(World.LOCATION_ID_BRIDGE)))
+            {
+                while (true)
+                {
+                    Console.Clear();
+                    Console.WriteLine($"{mc.Current_location.QuestAvailableHere.EndDialogue}\n");
+                    Console.WriteLine("Press any key to continue...");
+                    Console.ReadKey();
+
+                    mc.Quest_List.Remove(mc.Current_location.QuestAvailableHere);
+                    mc.Inventory.Items.Remove(World.MonsterByID(World.MONSTER_ID_GIANT_SPIDER).Drop);
+                    Thread.Sleep(1000);
+                    System.Environment.Exit(0);
+                    break;
+                }
+            }
+
             // checks for returning quests
             if ((mc.Quest_List.Contains(mc.Current_location.QuestAvailableHere) && (mc.Done_Quests.Contains(mc.Current_location.QuestAvailableHere))))
             {

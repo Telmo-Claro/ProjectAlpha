@@ -41,7 +41,7 @@ public static class World
 
     public static string Alchemist_quest = "Alchemist:\n�Those rats art nibbling on mine own h'rbs! I\r\ncouldst very much useth an adventur'r to taketh\r\ncareth of those folk ��";
     public static string Farmer_quest = "Farmer:\n�I can't w'rk mine own landeth with those pesky\r\nsnakes slith'ring 'round! Shall thee holp me?�";
-    public static string Final_quest_Ready = "Guard:\n�thou hast profed thy grit, enter and slay those snakes�";
+    public static string Final_quest_Ready = "Guard:\n�thou hast profed thy grit, enter and slay The Giant Spider, bring me back his Silk as proof�";
     public static string Final_quest_UnReady = "Guard:\n�Turn back at once, peasant! Unless thee\r\nhast proof of thy grit.�";
     // this is to be changed ofc
     public static string Alchemist_quest_end = "Here have Leen!";
@@ -84,6 +84,8 @@ public static class World
         Monsters.Add(snake);
         Monsters.Add(giantSpider);
         Monsters.Add(goblinThief);
+
+        giantSpider.Drop = new Item(420, "Spider Silk");
     }
 
     public static void PopulateQuests()
