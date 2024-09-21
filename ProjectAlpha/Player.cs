@@ -1,3 +1,4 @@
+
 public class Player
 {
     public string Name;
@@ -10,7 +11,7 @@ public class Player
     public List<Quest> Quest_List = new List<Quest> { };
     public List<Quest> Done_Quests = new List<Quest>() { };
     public List<Monster> Monster_Encountered = new List<Monster>() { };
-    public Inventory Inventory = new Inventory();
+    public Inventory Inventory;
 
     public Player(string name, Weapon current_weapon, int current_hp, int max_hp, Location current_location)
     {
@@ -19,6 +20,7 @@ public class Player
         this.Current_hp = current_hp;
         this.Max_hp = max_hp;
         this.Current_location = current_location;
+        this.Inventory = new Inventory();
         Inventory.Items.Add(Current_weapon);
     }
 
@@ -62,6 +64,10 @@ public class Player
     {
         while (true)
         {
+            if (item.Name == "Snus")
+            {
+                UseSnus();
+            }
             if (item is not Weapon weapon)
             {
                 Console.Clear();
@@ -84,7 +90,7 @@ public class Player
                 Console.WriteLine("(1) Yes");
                 Console.WriteLine("(2) No");
                 string tmp = Console.ReadLine();
-                if (tmp == "1") 
+                if (tmp == "1")
                 {
                     Console.Clear();
                     Console.WriteLine($"You have equiped {item.Name}");
@@ -92,7 +98,7 @@ public class Player
                     Thread.Sleep(800);
                     break;
                 }
-                else if(tmp == "2") 
+                else if (tmp == "2")
                 {
                     break;
                 }
@@ -100,5 +106,14 @@ public class Player
             }
         }
         InvMenu();
+    }
+    void UseSnus()
+    {
+        Console.WriteLine("Hmmmmm I love the buzz");
+        Current_hp -= 5;
+        Item? snus = Inventory.Items.FirstOrDefault(i => i.ID == 1 && i.Name == "Snus");
+        Inventory.Items.Remove(snus);
+
+        Console.ReadKey();
     }
 }

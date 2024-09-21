@@ -1,3 +1,5 @@
+using System.Security.Cryptography.X509Certificates;
+
 public class Program
 {
     public static void Main()
@@ -15,6 +17,10 @@ public class Program
                 mc = new Player(name, World.WeaponByID(World.WEAPON_ID_RUSTY_SWORD), 50, 50, World.Locations[0]);
                 Console.Clear();
                 Console.WriteLine($"Greetings, {name}\n");
+                if (Characters.characters.Contains(name))
+                {
+                    Characters.ItemAdd(mc);
+                }
                 Thread.Sleep(1000);
                 break;
             }
