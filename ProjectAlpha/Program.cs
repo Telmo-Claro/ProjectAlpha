@@ -95,6 +95,8 @@ public class Program
 
             // start menu
             Console.Clear();
+            if (mc.Name == "Elmo")
+                Characters.ApplySpacyTheme();
             Console.WriteLine($"Location: {mc.Current_location.Name}\n{mc.Current_location.Description}\n");
             Console.WriteLine("(1) Move");
             Console.WriteLine("(2) Quests");

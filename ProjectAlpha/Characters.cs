@@ -18,25 +18,31 @@ public static class Characters
                     }
                     break;
                 }
-                // case "Elmo":
-                //     {
-                //         Console.WriteLine("yu 8 magick muchroom.");
-                //         ApplySpacyTheme();
-                //         break;
-                //     }
+            case "Elmo":
+                {
+                    Console.WriteLine("yu 8 magick muchroom.");
+                    Console.BackgroundColor = ConsoleColor.Black;
+                    Console.Clear();
+
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.BackgroundColor = ConsoleColor.Magenta;
+                    Console.SetWindowSize(100, 30);
+                    Console.SetBufferSize(100, 500);
+                    break;
+                }
         }
     }
-    // static void ApplySpacyTheme()
-    // {
-    //     Console.BackgroundColor = ConsoleColor.Black;
-    //     Console.Clear();
-
-    //     Console.ForegroundColor = ConsoleColor.Cyan;
-
-    //     Console.WriteLine("   *        .        *          .     ");
-    //     Console.WriteLine("    .         *      .    *       *    ");
-    //     Console.WriteLine("  *     You are tripping!     .");
-    //     Console.WriteLine("     *       .        *       .        ");
-    //     Console.WriteLine("    .    *         *       .         * ");
-    // }
+    public static void ApplySpacyTheme()
+    {
+        for (int i = 0; i < 6; i++)
+        {
+            Console.WriteLine("   *        .        *          .     ");
+            Console.WriteLine("    .         *      .    *       *    ");
+            Console.WriteLine("  *     ants are crawling under your skin .");
+            Console.WriteLine("     *       .        *       .        ");
+            Console.WriteLine("    .    *         *       .         * ");
+            Thread.Sleep(80);
+        }
+        Console.Clear();
+    }
 }
