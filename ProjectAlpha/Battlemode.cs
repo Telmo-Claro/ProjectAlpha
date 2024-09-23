@@ -58,8 +58,8 @@ public class BattleMode
                     for (int i = 0; i < goblin.Inventory.Items.Count(); i++) 
                     {
                         Item itemBack = Playerrawr.Inventory.Items[i];
-                        goblin.Inventory.Items.RemoveAt(i);
                         Playerrawr.Inventory.Items.Add(itemBack);
+                        goblin.Inventory.Items.RemoveAt(i);
                     }
                     Console.ReadKey();
                 }
