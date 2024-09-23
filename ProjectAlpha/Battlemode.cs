@@ -1,4 +1,6 @@
+using System.Diagnostics;
 using System.Xml;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 public class BattleMode
 {
@@ -73,9 +75,19 @@ public class BattleMode
             if (Monsterrawr.CurrentHitPoints <= 0)
             {
                 Console.WriteLine($"Your HP: {Playerrawr.Current_hp}");
-                Console.WriteLine($"You have defeated the {Monsterrawr.Name}! Press any key to continue");
+                Console.WriteLine($"You have defeated the {Monsterrawr.Name}!");
+                if (Monsterrawr.Drop != null)
+                {
+                    Playerrawr.Inventory.Items.Add(Monsterrawr.Drop);
+                    Console.WriteLine($"You have dropped {Monsterrawr.Drop}");
+                }
+                Console.WriteLine("Press any key to continue ...");
                 Playerrawr.Done_Quests.Add(Monsterrawr.Quest);
                 inBattle = false;  // End the battle loop
+                if (Monsterrawr.Drop != null)
+                {
+                    Playerrawr.Inventory.Items.Add(Monsterrawr.Drop);
+                }
                 Console.ReadLine();
                 continue;
             }
@@ -97,7 +109,13 @@ public class BattleMode
                     // Check if the monster is defeated after player's attack
                     if (Monsterrawr.CurrentHitPoints <= 0)
                     {
-                        Console.WriteLine($"You have defeated the {Monsterrawr.Name}! Press any key to continue");
+                        Console.WriteLine($"You have defeated the {Monsterrawr.Name}!");
+                        if (Monsterrawr.Drop != null)
+                        {
+                            Playerrawr.Inventory.Items.Add(Monsterrawr.Drop);
+                            Console.WriteLine($"You have dropped {Monsterrawr.Drop}");
+                        }
+                        Console.WriteLine("Press any key to continue ...");
                         Playerrawr.Done_Quests.Add(Monsterrawr.Quest);
                         inBattle = false;  // End the battle
                         Console.ReadLine();

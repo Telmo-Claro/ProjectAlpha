@@ -6,6 +6,7 @@ public class Monster
     public int MaximumHitPoints;
     public int MaximumDamage;
     public Quest Quest;
+    public Item ?Drop;
 
     public Monster(int id, string Name, int MaximumDamage, int MaximumHitPoints, int CurrentHitPoints, Quest quest)
     {
