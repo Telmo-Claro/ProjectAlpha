@@ -13,14 +13,19 @@ public static class World
     public const int INVENTORY_ITEM_TREN = 4;
     public const int WEAPON_ID_RUSTY_SWORD = 1;
     public const int WEAPON_ID_CLUB = 2;
+    public const int WEAPON_ID_AXE = 3;
+    public const int WEAPON_ID_MACE = 4;
+    public const int WEAPON_ID_SPEAR = 5;
 
     public const int MONSTER_ID_RAT = 1;
     public const int MONSTER_ID_SNAKE = 2;
     public const int MONSTER_ID_GIANT_SPIDER = 3;
+    public const int MONSTER_ID_GOBLIN_THIEF = 4;
 
     public const int QUEST_ID_CLEAR_ALCHEMIST_GARDEN = 1;
     public const int QUEST_ID_CLEAR_FARMERS_FIELD = 2;
     public const int QUEST_ID_COLLECT_SPIDER_SILK = 3;
+    
 
     public const int LOCATION_ID_HOME = 1;
     public const int LOCATION_ID_TOWN_SQUARE = 2;
@@ -40,13 +45,17 @@ public static class World
 
     public static string Alchemist_quest = "Alchemist:\n�Those rats art nibbling on mine own h'rbs! I\r\ncouldst very much useth an adventur'r to taketh\r\ncareth of those folk ��";
     public static string Farmer_quest = "Farmer:\n�I can't w'rk mine own landeth with those pesky\r\nsnakes slith'ring 'round! Shall thee holp me?�";
-    public static string Final_quest_Ready = "Guard:\n�thou hast profed thy grit, enter and slay those snakes�";
+    public static string Final_quest_Ready = "Guard:\n�thou hast profed thy grit, enter and slay The Giant Spider, bring me back his Silk as proof�";
     public static string Final_quest_UnReady = "Guard:\n�Turn back at once, peasant! Unless thee\r\nhast proof of thy grit.�";
+
+    public static string Alchemist_quest_end = "Alchemist:\nAh, mine own h'rbs art finally safe! I can heareth the peace returneth to mine garden.\nThee hath done me a great service, adventur'r.\nH're, taketh this potion as a token of mine gratitude.\nMay it serveth thee well on thy travels!";
+    public static string Farmer_quest_end = "Farmer:\nBless thee, kind soul! Mine fields art free of those cursed snakes, and I can w'rk the landeth again.\nMay thy crops groweth strong wh'rev'r thee go.\nH're, accept this humble gift, a fair recompense for thy hon'rable w'rk.";
+    public static string Final_quest_end = "Guard:\nThou hast returned with the silk of the Giant Spider! Thy bravery doth knoweth no bounds.\nThy feat shall be spok'n of f'r years to cometh. As promiss'd, h're is thy rew'rd.\nGo now, and wear thy victory with pride!\n\n You won!!";
     static World()
     {
         PopulateWeapons();
-        PopulateMonsters();
         PopulateQuests();
+        PopulateMonsters();
         PopulateLocations();
     }
 
@@ -54,22 +63,32 @@ public static class World
     {
         Weapons.Add(new Weapon(WEAPON_ID_RUSTY_SWORD, "Rusty sword", 15));
         Weapons.Add(new Weapon(WEAPON_ID_CLUB, "Club", 50));
+        Weapons.Add(new Weapon(WEAPON_ID_AXE, "Axe", 80));
+        Weapons.Add(new Weapon(WEAPON_ID_MACE, "Mace", 75));
+        Weapons.Add(new Weapon(WEAPON_ID_SPEAR, "Spear", 30));
+
     }
 
     public static void PopulateMonsters()
     {
-        Monster rat = new Monster(MONSTER_ID_RAT, "rat", 15, 25, 25);
+        Monster rat = new Monster(MONSTER_ID_RAT, "Rat", 15, 25, 25, QuestByID(QUEST_ID_CLEAR_ALCHEMIST_GARDEN));
 
 
-        Monster snake = new Monster(MONSTER_ID_SNAKE, "snake", 10, 7, 7);
+        Monster snake = new Monster(MONSTER_ID_SNAKE, "Snake", 10, 7, 7, QuestByID(QUEST_ID_CLEAR_FARMERS_FIELD));
 
 
-        Monster giantSpider = new Monster(MONSTER_ID_GIANT_SPIDER, "giant spider", 3, 200, 200);
+        Monster giantSpider = new Monster(MONSTER_ID_GIANT_SPIDER, "Giant Spider", 3, 200, 200, QuestByID(QUEST_ID_COLLECT_SPIDER_SILK));
+
+
+        Monster goblinThief = new Monster(MONSTER_ID_GOBLIN_THIEF, "Carlo The Goblin Thief", 2, 50, 50, null);
 
 
         Monsters.Add(rat);
         Monsters.Add(snake);
         Monsters.Add(giantSpider);
+        Monsters.Add(goblinThief);
+
+        giantSpider.Drop = new Item(420, "Spider Silk");
     }
 
     public static void PopulateQuests()
@@ -103,14 +122,25 @@ public static class World
         clearAlchemistGarden.BeginDialogue = Alchemist_quest;
         clearFarmersField.BeginDialogue = Farmer_quest;
         clearSpidersForest.BeginDialogue = Final_quest_Ready;
+
+        clearAlchemistGarden.EndDialogue = Alchemist_quest_end;
+        clearFarmersField.EndDialogue = Farmer_quest_end;
+        clearSpidersForest.EndDialogue = Final_quest_end;
+
+        // adds rewards to quests
+
+        clearAlchemistGarden.Reward = new Potion(1, "Health Potion", 20);
+        clearFarmersField.Reward = WeaponByID(WEAPON_ID_CLUB);
     }
 
     public static void PopulateLocations()
     {
         // Create each location
         Location home = new Location(LOCATION_ID_HOME, "Home", "Your house. You really need to clean up the place.");
+        home.Friendly = true;
 
         Location townSquare = new Location(LOCATION_ID_TOWN_SQUARE, "Town square", "You see a fountain.");
+        townSquare.Friendly = true;
 
         Location alchemistHut = new Location(LOCATION_ID_ALCHEMIST_HUT, "Alchemist's hut", "There are many strange plants on the shelves.");
         alchemistHut.QuestAvailableHere = QuestByID(QUEST_ID_CLEAR_ALCHEMIST_GARDEN);

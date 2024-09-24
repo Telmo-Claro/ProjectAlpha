@@ -1,4 +1,6 @@
+using System.Diagnostics;
 using System.Xml;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 public class BattleMode
 {
@@ -8,6 +10,7 @@ public class BattleMode
     public Monster Monster;
     public Player Player;
     public Weapon Weapon;
+    public int roundCount = 1;
 
     public BattleMode(Monster monster, Player player)
     {
@@ -24,13 +27,67 @@ public class BattleMode
         while (Player.Current_hp > 0 && inBattle)
         {
             int damage = 0;
+            GoblinEncounter goblin = new(Player);
+            Console.WriteLine("Round: " + roundCount);
+            if (Monster == goblin.Goblin)
+            {
+                int playerInventoryLenght = Player.Inventory.Items.Count();
+                Random random = new Random();
+
+                if (roundCount == 4)
+                {
+                    Console.Write($"{goblin.Goblin.Name} has ran away with your items!\n" + Player.Name + "! Try to defeat it in 3 rounds next time!\n");
+                    Console.ReadKey();
+                    inBattle = false;
+                    break;
+                }
+
+                //steals an item every round
+                if (Player.Inventory.Items.Count() is not 0) 
+                { 
+                    int itemToSteal = random.Next(0, playerInventoryLenght - 1);
+                    Item itemStolen = Player.Inventory.Items[itemToSteal];
+                    goblin.Inventory.Items.Add(itemStolen);
+                    Player.Inventory.Items.RemoveAt(itemToSteal);
+                    Console.WriteLine($"{goblin.Goblin.Name} has stolen {itemStolen.Name} from you!");
+                    Console.ReadKey();
+                }
+
+
+                // if goblin dies, items go back to player
+                if (Monster.CurrentHitPoints <= 0) 
+                {
+                    for (int i = 0; i < goblin.Inventory.Items.Count(); i++) 
+                    {
+                        Item itemBack = Player.Inventory.Items[i];
+                        Player.Inventory.Items.Add(itemBack);
+                        goblin.Inventory.Items.RemoveAt(i);
+                    }
+                    Console.ReadKey();
+                }
+
+                // line separates the rounds
+                Console.WriteLine("------------------------------------------------------------");
+                roundCount++;
+            }
 
             // Check if the monster is already dead at the start of the loop
             if (Monster.CurrentHitPoints <= 0)
             {
                 Console.WriteLine($"Your HP: {Player.Current_hp}");
-                Console.WriteLine($"You have defeated the {Monster.Name}! Press any key to continue");
+                Console.WriteLine($"You have defeated the {Monster.Name}!");
+                if (Monster.Drop != null)
+                {
+                    Player.Inventory.Items.Add(Monster.Drop);
+                    Console.WriteLine($"You have dropped {Monster.Drop}");
+                }
+                Console.WriteLine("Press any key to continue ...");
+                Player.Done_Quests.Add(Monster.Quest);
                 inBattle = false;  // End the battle loop
+                if (Monster.Drop != null)
+                {
+                    Player.Inventory.Items.Add(Monster.Drop);
+                }
                 Console.ReadLine();
                 continue;
             }
@@ -75,6 +132,13 @@ public class BattleMode
                     if (Monster.CurrentHitPoints <= 0)
                     {
                         Console.WriteLine($"You have defeated the {Monster.Name}! Press any key to continue");
+                        if (Monster.Drop != null)
+                        {
+                            Player.Inventory.Items.Add(Monster.Drop);
+                            Console.WriteLine($"You have dropped {Monster.Drop}");
+                        }
+                        Console.WriteLine("Press any key to continue ...");
+                        Player.Done_Quests.Add(Monster.Quest);
                         inBattle = false;  // End the battle
                         Console.ReadKey();
                         continue;
@@ -96,6 +160,14 @@ public class BattleMode
 
                 case "2":
                     // Player flees from battle
+
+                    // if goblin, no flee allowed
+                    if (Monster == goblin.Goblin)
+                    {
+                        Console.WriteLine($"{Player.Name}, you can't escape the magnificient Goblin!");
+                        break;
+                    }
+
                     BattleModeFlee();
                     inBattle = false;  // Exit the battle after fleeing
                     break;

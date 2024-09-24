@@ -3,7 +3,7 @@ public class Player
 {
     public string Name;
     public Weapon Current_weapon;
-    public int Current_hp;
+    public int Current_hp; 
     public int Max_hp;
     public bool InFight;
     public Location Current_location;
@@ -20,8 +20,6 @@ public class Player
         this.Current_hp = current_hp;
         this.Max_hp = max_hp;
         this.Current_location = current_location;
-        this.Inventory = new Inventory();
-        Inventory.Items.Add(Current_weapon);
     }
 
     public void InvMenu()
@@ -68,23 +66,39 @@ public class Player
             {
                 UseSnus();
             }
-            if (item.Name == "Tren")
+            else if (item.Name == "Tren")
             {
                 InjectTren();
             }
-            if (item.Name == "Beer")
+            else if (item.Name == "Beer")
             {
                 Item? Beer = Inventory.Items.FirstOrDefault(i => i.ID == 3 && i.Name == "Beer");
                 Inventory.Items.Remove(Beer);
                 Console.WriteLine("Yummmmmmmmmmmm");
                 Thread.Sleep(1000);
             }
-            if (item is not Weapon weapon)
+            else if (item is Potion potion)
             {
                 Console.Clear();
-                Console.WriteLine("This item is not usable");
-                Thread.Sleep(100);
-                break;
+                Console.WriteLine($"Item: {item.Name}");
+                Console.WriteLine("Do you want to use this Potion?");
+                Console.WriteLine("(1) Yes");
+                Console.WriteLine("(2) No");
+                string tmp = Console.ReadLine();
+                if (tmp == "1")
+                {
+                    Console.Clear();
+                    Console.WriteLine($"You have used {item.Name}");
+                    Console.WriteLine($"+ {potion.HealthPoints}");
+                    Current_hp += potion.HealthPoints;
+                    Inventory.Items.Remove(potion);
+                    Thread.Sleep(1600);
+                    break;
+                }
+                else if (tmp == "2")
+                {
+                    break;
+                }
             }
             else if ((item is Weapon) && BattleMode.inBattle)
             {
@@ -93,7 +107,7 @@ public class Player
                 Thread.Sleep(1000);
                 break;
             }
-            else if (item is Weapon)
+            else if (item is Weapon weapon)
             {
                 Console.Clear();
                 Console.WriteLine($"Item: {item.Name}");
@@ -105,7 +119,9 @@ public class Player
                 {
                     Console.Clear();
                     Console.WriteLine($"You have equiped {item.Name}");
+                    Inventory.Items.Add(Current_weapon);
                     Current_weapon = weapon;
+                    Inventory.Items.Remove(weapon);
                     Thread.Sleep(800);
                     break;
                 }
@@ -116,7 +132,6 @@ public class Player
 
             }
         }
-        InvMenu();
     }
     void UseSnus()
     {

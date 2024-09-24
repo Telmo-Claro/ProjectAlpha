@@ -15,6 +15,7 @@ public class Program
             if (name is not null)
             {
                 mc = new Player(name, World.WeaponByID(World.WEAPON_ID_RUSTY_SWORD), 50, 50, World.Locations[0]);
+
                 Console.Clear();
                 Console.WriteLine($"Greetings, {name}\n");
                 if (Characters.characters.Contains(name))
@@ -39,7 +40,7 @@ public class Program
             // checks for when you enter a new location / updates
 
             // check for the final boss, first defeat 2 previous quests
-            if ((mc.Current_location == World.LocationByID(World.LOCATION_ID_GUARD_POST)) && ((!mc.Quest_List.Contains(World.QuestByID(World.QUEST_ID_CLEAR_ALCHEMIST_GARDEN))) && (!mc.Quest_List.Contains(World.QuestByID(World.QUEST_ID_CLEAR_FARMERS_FIELD)))))
+            if ((mc.Current_location == World.LocationByID(World.LOCATION_ID_GUARD_POST)) && ((!mc.Done_Quests.Contains(World.QuestByID(World.QUEST_ID_CLEAR_ALCHEMIST_GARDEN))) && (!mc.Done_Quests.Contains(World.QuestByID(World.QUEST_ID_CLEAR_FARMERS_FIELD)))))
             {
                 while (true)
                 {
@@ -54,8 +55,8 @@ public class Program
                     }
                 }
             }
-            // checks for quests
-            if ((mc.Current_location.QuestAvailableHere is not null) && (!mc.Quest_List.Contains(mc.Current_location.QuestAvailableHere)))
+            // checks for accepting quests
+            if ((mc.Current_location.QuestAvailableHere is not null) && (!mc.Quest_List.Contains(mc.Current_location.QuestAvailableHere)) && (!mc.Done_Quests.Contains(mc.Current_location.QuestAvailableHere)))
             {
                 while (true)
                 {
@@ -79,8 +80,42 @@ public class Program
                     }
                 }
             }
+            // check for returning Final Quest
+            if (mc.Done_Quests.Contains(mc.Current_location.QuestAvailableHere) && (mc.Current_location == World.LocationByID(World.LOCATION_ID_BRIDGE)))
+            {
+                while (true)
+                {
+                    Console.Clear();
+                    Console.WriteLine($"{mc.Current_location.QuestAvailableHere.EndDialogue}\n");
+                    Console.WriteLine("Press any key to continue...");
+                    Console.ReadKey();
 
-            // encounter monster the monster in non-friendly areas
+                    mc.Quest_List.Remove(mc.Current_location.QuestAvailableHere);
+                    mc.Inventory.Items.Remove(World.MonsterByID(World.MONSTER_ID_GIANT_SPIDER).Drop);
+                    Thread.Sleep(1000);
+                    System.Environment.Exit(0);
+                    break;
+                }
+            }
+
+            // checks for returning quests
+            if ((mc.Quest_List.Contains(mc.Current_location.QuestAvailableHere) && (mc.Done_Quests.Contains(mc.Current_location.QuestAvailableHere))))
+            {
+                while (true)
+                {
+                    Console.Clear();
+                    Console.WriteLine($"{mc.Current_location.QuestAvailableHere.EndDialogue}\n");
+                    Console.WriteLine($"You have recieved: {mc.Current_location.QuestAvailableHere.Reward.Name}");
+                    Console.WriteLine("Press any key to continue...");
+                    Console.ReadKey();
+                    
+                    mc.Quest_List.Remove(mc.Current_location.QuestAvailableHere);
+                    mc.Inventory.Items.Add(mc.Current_location.QuestAvailableHere.Reward);
+                    Thread.Sleep(1000);
+                    break;
+                }
+            }
+            // encounter monster in non-friendly areas if quest active.
             if ((mc.Current_location.MonsterLivingHere is not null) && (!mc.Monster_Encountered.Contains(mc.Current_location.MonsterLivingHere)))
             {
                 while (true)
@@ -91,6 +126,20 @@ public class Program
                     monster.choice();
                     break;
                 }
+            }
+
+            // Checks if player is in a non-friendly area and loads a chance of the goblin to appear.
+            if (!mc.Monster_Encountered.Contains(World.MonsterByID(World.MONSTER_ID_GOBLIN_THIEF)))
+            {
+                // make goblin-class object
+                GoblinEncounter goblin = new GoblinEncounter(mc);
+                if (goblin.ChanceOfEncounter() && !mc.Current_location.Friendly)
+                {
+                    Console.Clear();
+                    mc.Monster_Encountered.Add(World.MonsterByID(World.MONSTER_ID_GOBLIN_THIEF));
+                    goblin.IntoBattle();
+                }
+
             }
 
             // start menu
@@ -126,7 +175,7 @@ public class Program
                         Console.WriteLine("You have no active quests!");
                     }
 
-                    Console.WriteLine("\n(1) Back");
+                    Console.WriteLine("\n(1) Back\n> ");
                     string Back = Console.ReadLine();
                     if (Back == "1")
                     {
