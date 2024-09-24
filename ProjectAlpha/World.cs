@@ -43,10 +43,10 @@ public static class World
     public static string Farmer_quest = "Farmer:\n�I can't w'rk mine own landeth with those pesky\r\nsnakes slith'ring 'round! Shall thee holp me?�";
     public static string Final_quest_Ready = "Guard:\n�thou hast profed thy grit, enter and slay The Giant Spider, bring me back his Silk as proof�";
     public static string Final_quest_UnReady = "Guard:\n�Turn back at once, peasant! Unless thee\r\nhast proof of thy grit.�";
-    // this is to be changed ofc
-    public static string Alchemist_quest_end = "Here have Leen!";
-    public static string Farmer_quest_end = "Thank you for killing of those pesky rats! \nTake this Weird looking purple club i have found in the showers of Los Angeles Police Department";
-    public static string Final_quest_end = "You won epic";
+
+    public static string Alchemist_quest_end = "Alchemist:\nAh, mine own h'rbs art finally safe! I can heareth the peace returneth to mine garden.\nThee hath done me a great service, adventur'r.\nH're, taketh this potion as a token of mine gratitude.\nMay it serveth thee well on thy travels!";
+    public static string Farmer_quest_end = "Farmer:\nBless thee, kind soul! Mine fields art free of those cursed snakes, and I can w'rk the landeth again.\nMay thy crops groweth strong wh'rev'r thee go.\nH're, accept this humble gift, a fair recompense for thy hon'rable w'rk.";
+    public static string Final_quest_end = "Guard:\nThou hast returned with the silk of the Giant Spider! Thy bravery doth knoweth no bounds.\nThy feat shall be spok'n of f'r years to cometh. As promiss'd, h're is thy rew'rd.\nGo now, and wear thy victory with pride!\n\n You won!!";
     static World()
     {
         PopulateWeapons();
@@ -59,7 +59,7 @@ public static class World
     public static void PopulateWeapons()
     {
         Weapons.Add(new Weapon(WEAPON_ID_RUSTY_SWORD, "Rusty sword", 15));
-        Weapons.Add(new Weapon(WEAPON_ID_CLUB, "Purple Club", 50));
+        Weapons.Add(new Weapon(WEAPON_ID_CLUB, "Club", 50));
         Weapons.Add(new Weapon(WEAPON_ID_AXE, "Axe", 80));
         Weapons.Add(new Weapon(WEAPON_ID_MACE, "Mace", 75));
         Weapons.Add(new Weapon(WEAPON_ID_SPEAR, "Spear", 30));
