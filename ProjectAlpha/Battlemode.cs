@@ -74,7 +74,7 @@ public class BattleMode
             // Check if the monster is already dead at the start of the loop
             if (Monsterrawr.CurrentHitPoints <= 0)
             {
-                Console.WriteLine($"Your HP: {Playerrawr.Current_hp}");
+                Console.WriteLine(mc.DisplayHealthBar());
                 Console.WriteLine($"You have defeated the {Monsterrawr.Name}!");
                 if (Monsterrawr.Drop != null)
                 {
@@ -91,7 +91,7 @@ public class BattleMode
                 Console.ReadLine();
                 continue;
             }
-            Console.WriteLine($"Your HP: {Playerrawr.Current_hp}");
+            Console.WriteLine(mc.DisplayHealthBar());
             Console.WriteLine("What would you like to do?");
             Console.WriteLine("(1) Attack\n(2) Flee\n(3) Look at inventory\n(4) Quit game");
 

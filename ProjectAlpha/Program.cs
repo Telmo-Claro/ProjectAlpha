@@ -5,6 +5,7 @@ public class Program
         string? name;
         Player mc;
         bool MoveLoop = false;
+
         // name loop
         while (true)
         {
@@ -143,6 +144,7 @@ public class Program
             Console.WriteLine("(2) Quests");
             Console.WriteLine("(3) Inventory");
             Console.WriteLine("(4) Quit");
+            Console.WriteLine(mc.DisplayHealthBar());
 
             string Choice = Console.ReadLine();
             if (Choice == "1")

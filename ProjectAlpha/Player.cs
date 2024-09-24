@@ -117,4 +117,21 @@ public class Player
             }
         }
     }
+public string DisplayHealthBar()
+    {
+        string health = "";
+        // Calculate the health percentage
+        int healthPercentage = Current_hp / Max_hp * 100;
+        int barLength = 10;
+
+        // Calculate the number of filled segments
+        int mathsSegments = healthPercentage / 100 * barLength;
+
+        // Build the health bar string
+        string healthBar = new string('*', mathsSegments) + new string('-', barLength - mathsSegments);
+
+        // Display the health bar
+        health += $"Health: {Current_hp}/{Max_hp}\n[{healthBar}] {healthPercentage}%";
+        return health;
+    }
 }
