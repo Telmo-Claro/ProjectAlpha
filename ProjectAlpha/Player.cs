@@ -152,6 +152,7 @@ public class Player
         Item? Tren = Inventory.Items.FirstOrDefault(i => i.ID == 4 && i.Name == "Tren");
         Inventory.Items.Remove(Tren);
         Thread.Sleep(1500);
+    }
 public string DisplayHealthBar()
     {
         string health = "";
