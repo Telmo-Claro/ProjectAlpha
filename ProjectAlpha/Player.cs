@@ -3,7 +3,7 @@ public class Player
 {
     public string Name;
     public Weapon Current_weapon;
-    public int Current_hp; 
+    public int Current_hp;
     public int Max_hp;
     public bool InFight;
     public Location Current_location;
@@ -11,7 +11,7 @@ public class Player
     public List<Quest> Quest_List = new List<Quest> { };
     public List<Quest> Done_Quests = new List<Quest>() { };
     public List<Monster> Monster_Encountered = new List<Monster>() { };
-    public Inventory Inventory;
+    public Inventory Inventory = new Inventory();
 
     public Player(string name, Weapon current_weapon, int current_hp, int max_hp, Location current_location)
     {
@@ -65,10 +65,12 @@ public class Player
             if (item.Name == "Snus")
             {
                 UseSnus();
+                break;
             }
             else if (item.Name == "Tren")
             {
                 InjectTren();
+                break;
             }
             else if (item.Name == "Beer")
             {
@@ -76,6 +78,7 @@ public class Player
                 Inventory.Items.Remove(Beer);
                 Console.WriteLine("Yummmmmmmmmmmm");
                 Thread.Sleep(1000);
+                break;
             }
             else if (item is Potion potion)
             {
