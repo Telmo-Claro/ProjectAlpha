@@ -30,6 +30,18 @@ public class BattleMode
             GoblinEncounter goblin = new(Player);
             Console.WriteLine("Round: " + roundCount);
             if (Monster == goblin.Goblin)
+            Console.WriteLine("        ,      ,     ");
+            Console.WriteLine("       /(.-\"\"-.)\\   ");
+            Console.WriteLine("   |\\  \\/      \\/  /|");
+            Console.WriteLine("   | \\ / =.  .= \\ / |");
+            Console.WriteLine("   \\( \\   o\\/o   / )/");
+            Console.WriteLine("    \\_, '-/  \\-' ,_/ ");
+            Console.WriteLine("      /   \\__/   \\   ");
+            Console.WriteLine("      \\ \\__/\\__/ /   ");
+            Console.WriteLine("    ___\\ \\|--|/ /___ ");
+            Console.WriteLine("  /`    \\      /    `\\");
+            Console.WriteLine(" /       '----'       \\");
+
             {
                 int playerInventoryLenght = Player.Inventory.Items.Count();
                 Random random = new Random();
