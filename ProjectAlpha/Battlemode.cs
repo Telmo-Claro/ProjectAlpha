@@ -5,36 +5,36 @@ public class BattleMode
     public int damageByMonster;
     public int damageByPlayer;
     public static bool inBattle;
-    public Monster Monsterrawr;
-    public Player Playerrawr;
+    public Monster Monster;
+    public Player Player;
     public Weapon Weapon;
 
     public BattleMode(Monster monster, Player player)
     {
-        this.Monsterrawr = monster;
-        this.Playerrawr = player;
+        this.Monster = monster;
+        this.Player = player;
         this.Weapon = player.Current_weapon;
         inBattle = true;
     }
 
     public void BattleMenu()
     {
-        Console.WriteLine($"You encountered a {Monsterrawr.Name}!");
+        Console.WriteLine($"You encountered a {Monster.Name}!");
 
-        while (Playerrawr.Current_hp > 0 && inBattle)
+        while (Player.Current_hp > 0 && inBattle)
         {
             int damage = 0;
 
             // Check if the monster is already dead at the start of the loop
-            if (Monsterrawr.CurrentHitPoints <= 0)
+            if (Monster.CurrentHitPoints <= 0)
             {
-                Console.WriteLine($"Your HP: {Playerrawr.Current_hp}");
-                Console.WriteLine($"You have defeated the {Monsterrawr.Name}! Press any key to continue");
+                Console.WriteLine($"Your HP: {Player.Current_hp}");
+                Console.WriteLine($"You have defeated the {Monster.Name}! Press any key to continue");
                 inBattle = false;  // End the battle loop
                 Console.ReadLine();
                 continue;
             }
-            Console.WriteLine($"Your HP: {Playerrawr.Current_hp}");
+            Console.WriteLine($"Your HP: {Player.Current_hp}");
             Console.WriteLine("What would you like to do?");
             Console.WriteLine("(1) Attack\n(2) Flee\n(3) Look at inventory\n(4) Quit game");
 
@@ -44,30 +44,53 @@ public class BattleMode
             switch (playerChoice)
             {
                 case "1":
-                    // Player attacks the monster
-                    damage = RandomDamage(0, Weapon.maximumDamage);
-                    Console.WriteLine($"You hit {Monsterrawr.Name} for {damage} damage.");
-                    Monsterrawr.CurrentHitPoints -= damage;
+                    switch (Player.Name)
+                    {
+                        // player attacks
+                        case "Kasper":
+                            {
+                                damage = KasperDamage();
+                                Console.WriteLine($"You hit the {Monster.Name} for {damage}!");
+                                Monster.CurrentHitPoints -= damage;
+                                break;
+                            }
+                        case "Aksol":
+                            {
+                                damage = RandomDamage(0, Weapon.maximumDamage);
+                                damage = damage * 3;
+                                Console.WriteLine($"Wow you hit the {Monster.Name} for {damage}!");
+                                Monster.CurrentHitPoints -= damage;
+                                break;
+                            }
+                        default:
+                            {
+                                damage = RandomDamage(0, Weapon.maximumDamage);
+                                Console.WriteLine($"You hit {Monster.Name} for {damage} damage.");
+                                Monster.CurrentHitPoints -= damage;
+                                break;
+                            }
+                    }
 
                     // Check if the monster is defeated after player's attack
-                    if (Monsterrawr.CurrentHitPoints <= 0)
+                    if (Monster.CurrentHitPoints <= 0)
                     {
-                        Console.WriteLine($"You have defeated the {Monsterrawr.Name}! Press any key to continue");
+                        Console.WriteLine($"You have defeated the {Monster.Name}! Press any key to continue");
                         inBattle = false;  // End the battle
-                        Console.ReadLine();
+                        Console.ReadKey();
                         continue;
                     }
 
                     // Monster attacks back if not dead
-                    damage = RandomDamage(0, Monsterrawr.MaximumDamage);
-                    Console.WriteLine($"The {Monsterrawr.Name} hit you for {damage} damage.");
-                    Playerrawr.Current_hp -= damage;
+                    damage = RandomDamage(0, Monster.MaximumDamage);
+                    Console.WriteLine($"The {Monster.Name} hit you for {damage} damage.");
+                    Player.Current_hp -= damage;
 
                     // Check if the player is defeated after monster's attack
-                    if (Playerrawr.Current_hp <= 0)
+                    if (Player.Current_hp <= 0)
                     {
                         Console.WriteLine("You have been defeated.");
                         inBattle = false;  // End the battle
+                        Console.ReadKey();
                     }
                     continue;
 
@@ -80,7 +103,7 @@ public class BattleMode
                 case "3":
                     // Opens inventory
                     Console.WriteLine("Opening inventory...");
-                    Playerrawr.InvMenu();
+                    Player.InvMenu();
                     break;
 
                 case "4":
@@ -96,7 +119,7 @@ public class BattleMode
             }
 
             // Check if the player fled or was defeated
-            if (!inBattle || Playerrawr.Current_hp <= 0)
+            if (!inBattle || Player.Current_hp <= 0)
             {
                 break;
             }
@@ -123,9 +146,24 @@ public class BattleMode
         }
         else
         {
-            int damage = RandomDamage(0, Monsterrawr.MaximumDamage);
-            Console.WriteLine($"The {Monsterrawr.Name} hit you for {damage} while you were trying to flee!");
-            Playerrawr.Current_hp -= damage;
+            int damage = RandomDamage(0, Monster.MaximumDamage);
+            Console.WriteLine($"The {Monster.Name} hit you for {damage} while you were trying to flee!");
+            Player.Current_hp -= damage;
+        }
+    }
+
+    public int KasperDamage()
+    {
+        int kasperDamage = RandomDamage(0, Weapon.maximumDamage);
+        Random rnd = new Random();
+        int rndChance = rnd.Next(0, 101);
+        if (rndChance > 0 && rndChance < 50)
+        {
+            return kasperDamage * 2;
+        }
+        else
+        {
+            return 0;
         }
     }
 }

@@ -68,6 +68,17 @@ public class Player
             {
                 UseSnus();
             }
+            if (item.Name == "Tren")
+            {
+                InjectTren();
+            }
+            if (item.Name == "Beer")
+            {
+                Item? Beer = Inventory.Items.FirstOrDefault(i => i.ID == 3 && i.Name == "Beer");
+                Inventory.Items.Remove(Beer);
+                Console.WriteLine("Yummmmmmmmmmmm");
+                Thread.Sleep(1000);
+            }
             if (item is not Weapon weapon)
             {
                 Console.Clear();
@@ -111,9 +122,17 @@ public class Player
     {
         Console.WriteLine("Hmmmmm I love the buzz");
         Current_hp -= 5;
-        Item? snus = Inventory.Items.FirstOrDefault(i => i.ID == 1 && i.Name == "Snus");
-        Inventory.Items.Remove(snus);
+        Item? Snus = Inventory.Items.FirstOrDefault(i => i.ID == 1 && i.Name == "Snus");
+        Inventory.Items.Remove(Snus);
 
-        Console.ReadKey();
+        Thread.Sleep(1500);
+    }
+    void InjectTren()
+    {
+        Console.WriteLine("aww it keeps stinging... RAAAAAAAAAAA");
+        Current_hp = 1;
+        Item? Tren = Inventory.Items.FirstOrDefault(i => i.ID == 4 && i.Name == "Tren");
+        Inventory.Items.Remove(Tren);
+        Thread.Sleep(1500);
     }
 }

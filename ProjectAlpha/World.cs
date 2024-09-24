@@ -9,6 +9,8 @@ public static class World
 
     public const int INVENTORY_ITEM_SNUS = 1;
     public const int INVENTORY_ITEM_MUSHROOM = 2;
+    public const int INVENTORY_ITEM_BEER = 3;
+    public const int INVENTORY_ITEM_TREN = 4;
     public const int WEAPON_ID_RUSTY_SWORD = 1;
     public const int WEAPON_ID_CLUB = 2;
 

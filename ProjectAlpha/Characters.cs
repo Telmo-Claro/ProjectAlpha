@@ -2,7 +2,7 @@ public static class Characters
 {
     public static List<string> characters = new List<string>()
     {
-        "Maxx", "Elmo", "Kasper", "Aksel"
+        "Maxx", "Elmo", "Kasper", "Aksol"
     };
     public static void ItemAdd(Player Character)
     {
@@ -30,6 +30,23 @@ public static class Characters
                     Console.SetBufferSize(100, 500);
                     break;
                 }
+            case "Kasper":
+                {
+                    Console.WriteLine("you drankk too mucch beerrrr");
+                    Item beer = new Item(3, "Beer");
+                    Character.Inventory.Items.Add(beer);
+                    Thread.Sleep(1500);
+                    break;
+                }
+            case "Aksol":
+                {
+                    Console.WriteLine("You got Trenbolone acetate in your inventory.. When injected you get superpowers but you only have 1 hp left...");
+                    Item tren = new Item(4, "Tren");
+                    Character.Inventory.Items.Add(tren);
+                    Character.Current_hp = 1;
+                    Thread.Sleep(1500);
+                    break;
+                }
         }
     }
     public static void ApplySpacyTheme()
@@ -38,10 +55,10 @@ public static class Characters
         {
             Console.WriteLine("   *        .        *          .     ");
             Console.WriteLine("    .         *      .    *       *    ");
-            Console.WriteLine("  *     ants are crawling under your skin .");
+            Console.WriteLine("  *     ants are crawling under your skin *");
             Console.WriteLine("     *       .        *       .        ");
             Console.WriteLine("    .    *         *       .         * ");
-            Thread.Sleep(80);
+            Thread.Sleep(150);
         }
         Console.Clear();
     }
