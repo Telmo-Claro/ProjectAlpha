@@ -19,7 +19,6 @@ public class Player
         this.Current_hp = current_hp;
         this.Max_hp = max_hp;
         this.Current_location = current_location;
-        Inventory.Items.Add(Current_weapon);
     }
 
     public void InvMenu()
@@ -104,7 +103,9 @@ public class Player
                 {
                     Console.Clear();
                     Console.WriteLine($"You have equiped {item.Name}");
+                    Inventory.Items.Add(Current_weapon);
                     Current_weapon = weapon;
+                    Inventory.Items.Remove(weapon);
                     Thread.Sleep(800);
                     break;
                 }
