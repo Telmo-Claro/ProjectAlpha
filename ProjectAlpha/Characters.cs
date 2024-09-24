@@ -1,3 +1,4 @@
+using System;
 public static class Characters
 {
     public static List<string> characters = new List<string>()
@@ -21,6 +22,7 @@ public static class Characters
             case "Elmo":
                 {
                     Console.WriteLine("yu 8 magick muchroom.");
+                    SoundAccess.PlaySMB();
                     Console.BackgroundColor = ConsoleColor.Black;
                     Console.Clear();
 
@@ -34,7 +36,10 @@ public static class Characters
                 {
                     Console.WriteLine("you drankk too mucch beerrrr");
                     Item beer = new Item(3, "Beer");
-                    Character.Inventory.Items.Add(beer);
+                    for (int i = 0; i < 5; i++)
+                    {
+                        Character.Inventory.Items.Add(beer);
+                    }
                     Thread.Sleep(1500);
                     break;
                 }

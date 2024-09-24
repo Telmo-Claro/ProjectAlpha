@@ -28,6 +28,7 @@ public class Encounter
                 if (Player.Current_weapon.maximumDamage != 0)
                 {
                     BattleMode battle = new BattleMode(Monster, Player);
+                    SoundAccess.PlayFight();
                     battle.BattleMenu();
                     break;
                 }
