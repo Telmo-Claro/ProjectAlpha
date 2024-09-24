@@ -7,60 +7,60 @@ public class BattleMode
     public int damageByMonster;
     public int damageByPlayer;
     public static bool inBattle;
-    public Monster Monsterrawr;
-    public Player Playerrawr;
+    public Monster Monster;
+    public Player Player;
     public Weapon Weapon;
     public int roundCount = 1;
 
     public BattleMode(Monster monster, Player player)
     {
-        this.Monsterrawr = monster;
-        this.Playerrawr = player;
+        this.Monster = monster;
+        this.Player = player;
         this.Weapon = player.Current_weapon;
         inBattle = true;
     }
 
     public void BattleMenu()
     {
-        Console.WriteLine($"You encountered a {Monsterrawr.Name}!");
+        Console.WriteLine($"You encountered a {Monster.Name}!");
 
-        while (Playerrawr.Current_hp > 0 && inBattle)
+        while (Player.Current_hp > 0 && inBattle)
         {
             int damage = 0;
-            GoblinEncounter goblin = new(Playerrawr);
+            GoblinEncounter goblin = new(Player);
             Console.WriteLine("Round: " + roundCount);
-            if (Monsterrawr == goblin.Goblin)
+            if (Monster == goblin.Goblin)
             {
-                int playerInventoryLenght = Playerrawr.Inventory.Items.Count();
+                int playerInventoryLenght = Player.Inventory.Items.Count();
                 Random random = new Random();
 
                 if (roundCount == 4)
                 {
-                    Console.Write($"{goblin.Goblin.Name} has ran away with your items!\n" + Playerrawr.Name + "! Try to defeat it in 3 rounds next time!\n");
+                    Console.Write($"{goblin.Goblin.Name} has ran away with your items!\n" + Player.Name + "! Try to defeat it in 3 rounds next time!\n");
                     Console.ReadKey();
                     inBattle = false;
                     break;
                 }
 
                 //steals an item every round
-                if (Playerrawr.Inventory.Items.Count() is not 0) 
+                if (Player.Inventory.Items.Count() is not 0) 
                 { 
                     int itemToSteal = random.Next(0, playerInventoryLenght - 1);
-                    Item itemStolen = Playerrawr.Inventory.Items[itemToSteal];
+                    Item itemStolen = Player.Inventory.Items[itemToSteal];
                     goblin.Inventory.Items.Add(itemStolen);
-                    Playerrawr.Inventory.Items.RemoveAt(itemToSteal);
+                    Player.Inventory.Items.RemoveAt(itemToSteal);
                     Console.WriteLine($"{goblin.Goblin.Name} has stolen {itemStolen.Name} from you!");
                     Console.ReadKey();
                 }
 
 
                 // if goblin dies, items go back to player
-                if (Monsterrawr.CurrentHitPoints <= 0) 
+                if (Monster.CurrentHitPoints <= 0) 
                 {
                     for (int i = 0; i < goblin.Inventory.Items.Count(); i++) 
                     {
-                        Item itemBack = Playerrawr.Inventory.Items[i];
-                        Playerrawr.Inventory.Items.Add(itemBack);
+                        Item itemBack = Player.Inventory.Items[i];
+                        Player.Inventory.Items.Add(itemBack);
                         goblin.Inventory.Items.RemoveAt(i);
                     }
                     Console.ReadKey();
@@ -72,26 +72,26 @@ public class BattleMode
             }
 
             // Check if the monster is already dead at the start of the loop
-            if (Monsterrawr.CurrentHitPoints <= 0)
+            if (Monster.CurrentHitPoints <= 0)
             {
-                Console.WriteLine($"Your HP: {Playerrawr.Current_hp}");
-                Console.WriteLine($"You have defeated the {Monsterrawr.Name}!");
-                if (Monsterrawr.Drop != null)
+                Console.WriteLine($"Your HP: {Player.Current_hp}");
+                Console.WriteLine($"You have defeated the {Monster.Name}!");
+                if (Monster.Drop != null)
                 {
-                    Playerrawr.Inventory.Items.Add(Monsterrawr.Drop);
-                    Console.WriteLine($"You have dropped {Monsterrawr.Drop}");
+                    Player.Inventory.Items.Add(Monster.Drop);
+                    Console.WriteLine($"You have dropped {Monster.Drop}");
                 }
                 Console.WriteLine("Press any key to continue ...");
-                Playerrawr.Done_Quests.Add(Monsterrawr.Quest);
+                Player.Done_Quests.Add(Monster.Quest);
                 inBattle = false;  // End the battle loop
-                if (Monsterrawr.Drop != null)
+                if (Monster.Drop != null)
                 {
-                    Playerrawr.Inventory.Items.Add(Monsterrawr.Drop);
+                    Player.Inventory.Items.Add(Monster.Drop);
                 }
                 Console.ReadLine();
                 continue;
             }
-            Console.WriteLine($"Your HP: {Playerrawr.Current_hp}");
+            Console.WriteLine($"Your HP: {Player.Current_hp}");
             Console.WriteLine("What would you like to do?");
             Console.WriteLine("(1) Attack\n(2) Flee\n(3) Look at inventory\n(4) Quit game");
 
@@ -101,37 +101,60 @@ public class BattleMode
             switch (playerChoice)
             {
                 case "1":
-                    // Player attacks the monster
-                    damage = RandomDamage(0, Weapon.maximumDamage);
-                    Console.WriteLine($"You hit {Monsterrawr.Name} for {damage} damage.");
-                    Monsterrawr.CurrentHitPoints -= damage;
+                    switch (Player.Name)
+                    {
+                        // player attacks
+                        case "Kasper":
+                            {
+                                damage = KasperDamage();
+                                Console.WriteLine($"You hit the {Monster.Name} for {damage}!");
+                                Monster.CurrentHitPoints -= damage;
+                                break;
+                            }
+                        case "Aksol":
+                            {
+                                damage = RandomDamage(0, Weapon.maximumDamage);
+                                damage = damage * 3;
+                                Console.WriteLine($"Wow you hit the {Monster.Name} for {damage}!");
+                                Monster.CurrentHitPoints -= damage;
+                                break;
+                            }
+                        default:
+                            {
+                                damage = RandomDamage(0, Weapon.maximumDamage);
+                                Console.WriteLine($"You hit {Monster.Name} for {damage} damage.");
+                                Monster.CurrentHitPoints -= damage;
+                                break;
+                            }
+                    }
 
                     // Check if the monster is defeated after player's attack
-                    if (Monsterrawr.CurrentHitPoints <= 0)
+                    if (Monster.CurrentHitPoints <= 0)
                     {
-                        Console.WriteLine($"You have defeated the {Monsterrawr.Name}!");
-                        if (Monsterrawr.Drop != null)
+                        Console.WriteLine($"You have defeated the {Monster.Name}! Press any key to continue");
+                        if (Monster.Drop != null)
                         {
-                            Playerrawr.Inventory.Items.Add(Monsterrawr.Drop);
-                            Console.WriteLine($"You have dropped {Monsterrawr.Drop}");
+                            Player.Inventory.Items.Add(Monster.Drop);
+                            Console.WriteLine($"You have dropped {Monster.Drop}");
                         }
                         Console.WriteLine("Press any key to continue ...");
-                        Playerrawr.Done_Quests.Add(Monsterrawr.Quest);
+                        Player.Done_Quests.Add(Monster.Quest);
                         inBattle = false;  // End the battle
-                        Console.ReadLine();
+                        Console.ReadKey();
                         continue;
                     }
 
                     // Monster attacks back if not dead
-                    damage = RandomDamage(0, Monsterrawr.MaximumDamage);
-                    Console.WriteLine($"The {Monsterrawr.Name} hit you for {damage} damage.");
-                    Playerrawr.Current_hp -= damage;
+                    damage = RandomDamage(0, Monster.MaximumDamage);
+                    Console.WriteLine($"The {Monster.Name} hit you for {damage} damage.");
+                    Player.Current_hp -= damage;
 
                     // Check if the player is defeated after monster's attack
-                    if (Playerrawr.Current_hp <= 0)
+                    if (Player.Current_hp <= 0)
                     {
                         Console.WriteLine("You have been defeated.");
                         inBattle = false;  // End the battle
+                        Console.ReadKey();
                     }
                     continue;
 
@@ -139,9 +162,9 @@ public class BattleMode
                     // Player flees from battle
 
                     // if goblin, no flee allowed
-                    if (Monsterrawr == goblin.Goblin)
+                    if (Monster == goblin.Goblin)
                     {
-                        Console.WriteLine($"{Playerrawr.Name}, you can't escape the magnificient Goblin!");
+                        Console.WriteLine($"{Player.Name}, you can't escape the magnificient Goblin!");
                         break;
                     }
 
@@ -152,7 +175,7 @@ public class BattleMode
                 case "3":
                     // Opens inventory
                     Console.WriteLine("Opening inventory...");
-                    Playerrawr.InvMenu();
+                    Player.InvMenu();
                     break;
 
                 case "4":
@@ -168,7 +191,7 @@ public class BattleMode
             }
 
             // Check if the player fled or was defeated
-            if (!inBattle || Playerrawr.Current_hp <= 0)
+            if (!inBattle || Player.Current_hp <= 0)
             {
                 break;
             }
@@ -195,9 +218,24 @@ public class BattleMode
         }
         else
         {
-            int damage = RandomDamage(0, Monsterrawr.MaximumDamage);
-            Console.WriteLine($"The {Monsterrawr.Name} hit you for {damage} while you were trying to flee!");
-            Playerrawr.Current_hp -= damage;
+            int damage = RandomDamage(0, Monster.MaximumDamage);
+            Console.WriteLine($"The {Monster.Name} hit you for {damage} while you were trying to flee!");
+            Player.Current_hp -= damage;
+        }
+    }
+
+    public int KasperDamage()
+    {
+        int kasperDamage = RandomDamage(0, Weapon.maximumDamage);
+        Random rnd = new Random();
+        int rndChance = rnd.Next(0, 101);
+        if (rndChance > 0 && rndChance < 50)
+        {
+            return kasperDamage * 2;
+        }
+        else
+        {
+            return 0;
         }
     }
 }

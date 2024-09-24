@@ -7,6 +7,10 @@ public static class World
     public static readonly List<Location> Locations = new List<Location>();
     public static readonly Random RandomGenerator = new Random();
 
+    public const int INVENTORY_ITEM_SNUS = 1;
+    public const int INVENTORY_ITEM_MUSHROOM = 2;
+    public const int INVENTORY_ITEM_BEER = 3;
+    public const int INVENTORY_ITEM_TREN = 4;
     public const int WEAPON_ID_RUSTY_SWORD = 1;
     public const int WEAPON_ID_CLUB = 2;
     public const int WEAPON_ID_AXE = 3;
@@ -54,7 +58,6 @@ public static class World
         PopulateMonsters();
         PopulateLocations();
     }
-
 
     public static void PopulateWeapons()
     {

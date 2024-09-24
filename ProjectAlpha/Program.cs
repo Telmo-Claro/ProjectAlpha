@@ -1,3 +1,5 @@
+using System.Security.Cryptography.X509Certificates;
+
 public class Program
 {
     public static void Main()
@@ -16,6 +18,10 @@ public class Program
 
                 Console.Clear();
                 Console.WriteLine($"Greetings, {name}\n");
+                if (Characters.characters.Contains(name))
+                {
+                    Characters.ItemAdd(mc);
+                }
                 Thread.Sleep(1000);
                 break;
             }
@@ -138,6 +144,8 @@ public class Program
 
             // start menu
             Console.Clear();
+            if (mc.Name == "Elmo")
+                Characters.ApplySpacyTheme();
             Console.WriteLine($"Location: {mc.Current_location.Name}\n{mc.Current_location.Description}\n");
             Console.WriteLine("(1) Move");
             Console.WriteLine("(2) Quests");

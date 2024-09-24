@@ -1,3 +1,4 @@
+
 public class Player
 {
     public string Name;
@@ -10,7 +11,7 @@ public class Player
     public List<Quest> Quest_List = new List<Quest> { };
     public List<Quest> Done_Quests = new List<Quest>() { };
     public List<Monster> Monster_Encountered = new List<Monster>() { };
-    public Inventory Inventory = new Inventory();
+    public Inventory Inventory;
 
     public Player(string name, Weapon current_weapon, int current_hp, int max_hp, Location current_location)
     {
@@ -61,7 +62,22 @@ public class Player
     {
         while (true)
         {
-            if (item is Potion potion)
+            if (item.Name == "Snus")
+            {
+                UseSnus();
+            }
+            else if (item.Name == "Tren")
+            {
+                InjectTren();
+            }
+            else if (item.Name == "Beer")
+            {
+                Item? Beer = Inventory.Items.FirstOrDefault(i => i.ID == 3 && i.Name == "Beer");
+                Inventory.Items.Remove(Beer);
+                Console.WriteLine("Yummmmmmmmmmmm");
+                Thread.Sleep(1000);
+            }
+            else if (item is Potion potion)
             {
                 Console.Clear();
                 Console.WriteLine($"Item: {item.Name}");
@@ -99,7 +115,7 @@ public class Player
                 Console.WriteLine("(1) Yes");
                 Console.WriteLine("(2) No");
                 string tmp = Console.ReadLine();
-                if (tmp == "1") 
+                if (tmp == "1")
                 {
                     Console.Clear();
                     Console.WriteLine($"You have equiped {item.Name}");
@@ -109,12 +125,29 @@ public class Player
                     Thread.Sleep(800);
                     break;
                 }
-                else if(tmp == "2") 
+                else if (tmp == "2")
                 {
                     break;
                 }
 
             }
         }
+    }
+    void UseSnus()
+    {
+        Console.WriteLine("Hmmmmm I love the buzz");
+        Current_hp -= 5;
+        Item? Snus = Inventory.Items.FirstOrDefault(i => i.ID == 1 && i.Name == "Snus");
+        Inventory.Items.Remove(Snus);
+
+        Thread.Sleep(1500);
+    }
+    void InjectTren()
+    {
+        Console.WriteLine("aww it keeps stinging... RAAAAAAAAAAA");
+        Current_hp = 1;
+        Item? Tren = Inventory.Items.FirstOrDefault(i => i.ID == 4 && i.Name == "Tren");
+        Inventory.Items.Remove(Tren);
+        Thread.Sleep(1500);
     }
 }
