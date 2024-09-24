@@ -1,0 +1,50 @@
+using System;
+
+public class Health
+{
+    private int health;
+    private const int maxHealth = 50; 
+
+    public Health(int initialHealth)
+    {
+        health = initialHealth;
+        DisplayHealth();
+    }
+
+    public void Heal(int amount)
+    {
+        health += amount;
+        if (health > maxHealth) health = maxHealth; 
+        DisplayHealth();
+    }
+
+    public void DisplayHealth()
+    {
+        Console.WriteLine($"Current Health: {health}");
+    }
+
+     public void ApplyPotion()
+    {
+        Console.Write("1) Drink potion\n2) Quit\n> ");
+        int choice;
+
+        while (!int.TryParse(Console.ReadLine(), out choice) || choice < 1 || choice > 2)
+        {
+            Console.Write("Invalid choice. Please enter 1 or 2: ");
+        }
+
+        switch (choice)
+        {
+            case 1:
+                Heal(potionHealAmount);
+                Console.WriteLine("You used a healing potion.");
+                break;
+            case 2:
+                Console.WriteLine("You chose to quit using the potion.");
+                break;
+            default:
+                Console.WriteLine("Invalid choice.");
+                break;
+        }
+    }
+}

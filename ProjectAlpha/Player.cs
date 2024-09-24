@@ -2,7 +2,7 @@ public class Player
 {
     public string Name;
     public Weapon Current_weapon;
-    public int Current_hp;
+    public int Current_hp; 
     public int Max_hp;
     public bool InFight;
     public Location Current_location;
