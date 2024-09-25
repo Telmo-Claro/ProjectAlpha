@@ -28,7 +28,6 @@ public class BattleMode
         while (Player.Current_hp > 0 && inBattle)
         {
             int damage = 0;
-            GoblinEncounter goblin = new(Player);
             Console.WriteLine("Round: " + roundCount);
             if (Monster.Name == "Snake")
             {
@@ -44,6 +43,7 @@ public class BattleMode
             }
             if (Monster == goblin.Goblin)
             {
+                GoblinEncounter goblin = new(Player);
                 art.Goblin();
                 int playerInventoryLenght = Player.Inventory.Items.Count();
                 Random random = new Random();
