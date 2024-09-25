@@ -147,12 +147,12 @@ public class Program
             Console.Clear();
             if (mc.Name == "Elmo")
                 Characters.ApplySpacyTheme();
+            Console.WriteLine(mc.DisplayHealthBar());
             Console.WriteLine($"Location: {mc.Current_location.Name}\n{mc.Current_location.Description}\n");
             Console.WriteLine("(1) Move");
             Console.WriteLine("(2) Quests");
             Console.WriteLine("(3) Inventory");
             Console.WriteLine("(4) Quit");
-            Console.WriteLine(mc.DisplayHealthBar());
 
             string Choice = Console.ReadLine();
             if (Choice == "1")

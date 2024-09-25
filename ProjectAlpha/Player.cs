@@ -160,17 +160,17 @@ public class Player
     {
         string health = "";
         // Calculate the health percentage
-        int healthPercentage = Current_hp / Max_hp * 100;
+        int healthPercentage = (Current_hp * 100) / Max_hp;
         int barLength = 10;
 
         // Calculate the number of filled segments
-        int mathsSegments = healthPercentage / 100 * barLength;
+        int mathsSegments = (healthPercentage / 100) * barLength;
 
         // Build the health bar string
-        string healthBar = new string('*', mathsSegments) + new string('-', barLength - mathsSegments);
+        //string healthBar = new string('-', mathsSegments) + new string('-', barLength - mathsSegments );
 
         // Display the health bar
-        health += $"Health: {Current_hp}/{Max_hp}\n[{healthBar}] {healthPercentage}%";
+        health += $"Health -`♡´- {Current_hp}/{Max_hp} {healthPercentage}%\n";
         return health;
     }
 }

@@ -22,15 +22,29 @@ public class BattleMode
 
     public void BattleMenu()
     {
+        Ascii art = new Ascii();
+        GoblinEncounter goblin = new(Player);
         Console.WriteLine($"You encountered a {Monster.Name}!");
 
         while (Player.Current_hp > 0 && inBattle)
         {
             int damage = 0;
-            GoblinEncounter goblin = new(Player);
             Console.WriteLine("Round: " + roundCount);
+            if (Monster.Name == "Snake")
+            {
+                art.Snake();
+            }
+            else if(Monster.Name == "Rat")
+            {
+                art.Rat();
+            }
+            else if(Monster.Name == "Giant Spider")
+            {
+                art.Spider();
+            }
             if (Monster == goblin.Goblin)
             {
+                art.Goblin();
                 int playerInventoryLenght = Player.Inventory.Items.Count();
                 Random random = new Random();
 
@@ -65,10 +79,9 @@ public class BattleMode
                     }
                     Console.ReadKey();
                 }
-
-                // line separates the rounds
-                Console.WriteLine("------------------------------------------------------------");
             }
+            Console.WriteLine("------------------------------------------------------------");
+            roundCount++;
 
             // Check if the monster is already dead at the start of the loop
             if (Monster.CurrentHitPoints <= 0)
