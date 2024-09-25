@@ -62,7 +62,7 @@ public static class World
     public static void PopulateWeapons()
     {
         Weapons.Add(new Weapon(WEAPON_ID_RUSTY_SWORD, "Rusty sword", 15));
-        Weapons.Add(new Weapon(WEAPON_ID_CLUB, "Club", 50));
+        Weapons.Add(new Weapon(WEAPON_ID_CLUB, "Club", 25));
         Weapons.Add(new Weapon(WEAPON_ID_AXE, "Axe", 80));
         Weapons.Add(new Weapon(WEAPON_ID_MACE, "Mace", 75));
         Weapons.Add(new Weapon(WEAPON_ID_SPEAR, "Spear", 30));
