@@ -167,7 +167,7 @@ public string DisplayHealthBar()
         //string healthBar = new string('-', mathsSegments) + new string('-', barLength - mathsSegments );
 
         // Display the health bar
-        health += $"Health\n {Current_hp}/{Max_hp}\n-`♡´- {healthPercentage}%";
+        health += $"Health -`♡´- {Current_hp}/{Max_hp} {healthPercentage}%\n";
         return health;
     }
 }
