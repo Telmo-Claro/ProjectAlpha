@@ -165,7 +165,7 @@ public class BattleMode
                     // Check if the player is defeated after monster's attack
                     if (Player.Current_hp <= 0)
                     {
-                        Console.WriteLine("You have been defeated.");
+                        Console.WriteLine("You have been defeated............");
                         inBattle = false;  // End the battle
                         Console.ReadKey();
                     }
