@@ -22,28 +22,29 @@ public class BattleMode
 
     public void BattleMenu()
     {
+        Ascii art = new Ascii();
         Console.WriteLine($"You encountered a {Monster.Name}!");
 
         while (Player.Current_hp > 0 && inBattle)
         {
             int damage = 0;
-            GoblinEncounter goblin = new(Player);
             Console.WriteLine("Round: " + roundCount);
+            if (Monster.Name == "Snake")
+            {
+                art.Snake();
+            }
+            else if(Monster.Name == "Rat")
+            {
+                art.Rat();
+            }
+            else if(Monster.Name == "Giant Spider")
+            {
+                art.Spider();
+            }
             if (Monster == goblin.Goblin)
-            { 
-                Console.WriteLine("        ,      ,     ");
-                Console.WriteLine("       /(.-\"\"-.)\\   ");
-                Console.WriteLine("   |\\  \\/      \\/  /|");
-                Console.WriteLine("   | \\ / =.  .= \\ / |");
-                Console.WriteLine("   \\( \\   o\\/o   / )/");
-                Console.WriteLine("    \\_, '-/  \\-' ,_/ ");
-                Console.WriteLine("      /   \\__/   \\   ");
-                Console.WriteLine("      \\ \\__/\\__/ /   ");
-                Console.WriteLine("    ___\\ \\|--|/ /___ ");
-                Console.WriteLine("  /`    \\      /    `\\");
-                Console.WriteLine(" /       '----'       \\");
-
-            
+            {
+                GoblinEncounter goblin = new(Player);
+                art.Goblin();
                 int playerInventoryLenght = Player.Inventory.Items.Count();
                 Random random = new Random();
 
@@ -79,10 +80,10 @@ public class BattleMode
                     Console.ReadKey();
                 }
 
-                // line separates the rounds
-                Console.WriteLine("------------------------------------------------------------");
-                roundCount++;
+            // line separates the rounds
             }
+            Console.WriteLine("------------------------------------------------------------");
+            roundCount++;
 
             // Check if the monster is already dead at the start of the loop
             if (Monster.CurrentHitPoints <= 0)
