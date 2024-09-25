@@ -91,10 +91,17 @@ public class Player
                 string tmp = Console.ReadLine();
                 if (tmp == "1")
                 {
+                    if (Current_hp + potion.HealthPoints > Max_hp)
+                    {
+                        Current_hp = Max_hp;
+                    }
+                    else
+                    {
+                        Current_hp += potion.HealthPoints;
+                    }
                     Console.Clear();
                     Console.WriteLine($"You have used {item.Name}");
                     Console.WriteLine($"+ {potion.HealthPoints}");
-                    Current_hp += potion.HealthPoints;
                     Inventory.Items.Remove(potion);
                     Thread.Sleep(1600);
                     break;

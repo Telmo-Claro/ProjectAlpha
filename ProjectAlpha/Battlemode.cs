@@ -103,7 +103,7 @@ public class BattleMode
                 Console.ReadLine();
                 continue;
             }
-            roundCount++;
+
             Console.WriteLine(Player.DisplayHealthBar());
             Console.WriteLine("What would you like to do?");
             Console.WriteLine("(1) Attack\n(2) Flee\n(3) Look at inventory\n(4) Quit game");
@@ -144,11 +144,11 @@ public class BattleMode
                     // Check if the monster is defeated after player's attack
                     if (Monster.CurrentHitPoints <= 0)
                     {
-                        Console.WriteLine($"You have defeated the {Monster.Name}! Press any key to continue");
+                        Console.WriteLine($"You have defeated the {Monster.Name}!");
                         if (Monster.Drop != null)
                         {
                             Player.Inventory.Items.Add(Monster.Drop);
-                            Console.WriteLine($"You have dropped {Monster.Drop}");
+                            Console.WriteLine($"You have dropped {Monster.Drop.Name}");
                         }
                         Console.WriteLine("Press any key to continue ...");
                         Player.Done_Quests.Add(Monster.Quest);

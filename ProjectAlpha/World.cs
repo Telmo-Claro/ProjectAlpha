@@ -50,7 +50,7 @@ public static class World
 
     public static string Alchemist_quest_end = "Alchemist:\nAh, mine own h'rbs art finally safe! I can heareth the peace returneth to mine garden.\nThee hath done me a great service, adventur'r.\nH're, taketh this potion as a token of mine gratitude.\nMay it serveth thee well on thy travels!";
     public static string Farmer_quest_end = "Farmer:\nBless thee, kind soul! Mine fields art free of those cursed snakes, and I can w'rk the landeth again.\nMay thy crops groweth strong wh'rev'r thee go.\nH're, accept this humble gift, a fair recompense for thy hon'rable w'rk.";
-    public static string Final_quest_end = "Guard:\nThou hast returned with the silk of the Giant Spider! Thy bravery doth knoweth no bounds.\nThy feat shall be spok'n of f'r years to cometh. As promiss'd, h're is thy rew'rd.\nGo now, and wear thy victory with pride!\n\n You won!!";
+    public static string Final_quest_end = "Guard:\nThou hast returned with the silk of the Giant Spider! Thy bravery doth knoweth no bounds.\nThy feat shall be spok'n of f'r years to cometh. As promiss'd, h're is thy rew'rd.\nGo now, and wear thy victory with pride!\n\nYou won!!";
     static World()
     {
         PopulateWeapons();
