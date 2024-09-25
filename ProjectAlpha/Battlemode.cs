@@ -23,6 +23,7 @@ public class BattleMode
     public void BattleMenu()
     {
         Ascii art = new Ascii();
+        GoblinEncounter goblin = new(Player);
         Console.WriteLine($"You encountered a {Monster.Name}!");
 
         while (Player.Current_hp > 0 && inBattle)
@@ -43,7 +44,6 @@ public class BattleMode
             }
             if (Monster == goblin.Goblin)
             {
-                GoblinEncounter goblin = new(Player);
                 art.Goblin();
                 int playerInventoryLenght = Player.Inventory.Items.Count();
                 Random random = new Random();
@@ -57,8 +57,8 @@ public class BattleMode
                 }
 
                 //steals an item every round
-                if (Player.Inventory.Items.Count() is not 0) 
-                { 
+                if (Player.Inventory.Items.Count() is not 0)
+                {
                     int itemToSteal = random.Next(0, playerInventoryLenght - 1);
                     Item itemStolen = Player.Inventory.Items[itemToSteal];
                     goblin.Inventory.Items.Add(itemStolen);
@@ -69,9 +69,9 @@ public class BattleMode
 
 
                 // if goblin dies, items go back to player
-                if (Monster.CurrentHitPoints <= 0) 
+                if (Monster.CurrentHitPoints <= 0)
                 {
-                    for (int i = 0; i < goblin.Inventory.Items.Count(); i++) 
+                    for (int i = 0; i < goblin.Inventory.Items.Count(); i++)
                     {
                         Item itemBack = Player.Inventory.Items[i];
                         Player.Inventory.Items.Add(itemBack);
@@ -79,8 +79,6 @@ public class BattleMode
                     }
                     Console.ReadKey();
                 }
-
-            // line separates the rounds
             }
             Console.WriteLine("------------------------------------------------------------");
             roundCount++;
@@ -105,6 +103,7 @@ public class BattleMode
                 Console.ReadLine();
                 continue;
             }
+            roundCount++;
             Console.WriteLine(Player.DisplayHealthBar());
             Console.WriteLine("What would you like to do?");
             Console.WriteLine("(1) Attack\n(2) Flee\n(3) Look at inventory\n(4) Quit game");

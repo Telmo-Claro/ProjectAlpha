@@ -77,6 +77,7 @@ public class Player
                 Item? Beer = Inventory.Items.FirstOrDefault(i => i.ID == 3 && i.Name == "Beer");
                 Inventory.Items.Remove(Beer);
                 Console.WriteLine("Yummmmmmmmmmmm");
+                SoundAccess.PlayRoblox();
                 Thread.Sleep(1000);
                 break;
             }
@@ -139,6 +140,7 @@ public class Player
     void UseSnus()
     {
         Console.WriteLine("Hmmmmm I love the buzz");
+        SoundAccess.PlayAugh();
         Current_hp -= 5;
         Item? Snus = Inventory.Items.FirstOrDefault(i => i.ID == 1 && i.Name == "Snus");
         Inventory.Items.Remove(Snus);
@@ -147,13 +149,14 @@ public class Player
     }
     void InjectTren()
     {
-        Console.WriteLine("aww it keeps stinging... RAAAAA( ๑ ˃̵ᴗ˂̵)و ♡");
+        Console.WriteLine("aww it keeps stinging... RAAAAAAAAAAA");
+        SoundAccess.PlayZyzz();
         Current_hp = 1;
         Item? Tren = Inventory.Items.FirstOrDefault(i => i.ID == 4 && i.Name == "Tren");
         Inventory.Items.Remove(Tren);
         Thread.Sleep(1500);
     }
-public string DisplayHealthBar()
+    public string DisplayHealthBar()
     {
         string health = "";
         // Calculate the health percentage
