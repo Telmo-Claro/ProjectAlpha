@@ -24,7 +24,7 @@ public class GoblinEncounter
     {
         Random rand = new Random();
         double randResult = rand.NextDouble();
-        if (randResult <= 0.33)
+        if (randResult <= 0.90)
         {
             return true;
         }
@@ -38,9 +38,6 @@ public class GoblinEncounter
     public void IntoBattle()
     {
         BattleMode Battle = new BattleMode(Goblin, Player);
-        if (ChanceOfEncounter())
-        {
-            Battle.BattleMenu();
-        }
+        Battle.BattleMenu();
     }
 }
