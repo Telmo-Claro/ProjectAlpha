@@ -48,7 +48,6 @@ public static class Characters
                     Console.WriteLine("You got Trenbolone acetate in your inventory.. When injected you get superpowers but you only have 1 hp left...");
                     Item tren = new Item(4, "Tren");
                     Character.Inventory.Items.Add(tren);
-                    Character.Current_hp = 1;
                     Thread.Sleep(1500);
                     break;
                 }
