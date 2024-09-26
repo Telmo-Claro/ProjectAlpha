@@ -8,8 +8,15 @@ public static class SoundAccess
         {
             try
             {
-                using SoundPlayer soundPlayer = new SoundPlayer("smbsound.wav");
-                soundPlayer.PlaySync();
+                string basePath = AppDomain.CurrentDomain.BaseDirectory;
+                string projectRootPath = Path.Combine(basePath, "..", "..", "..");
+
+                // Combine with the relative path to the audio file in the project directory
+                string soundFilePath = Path.Combine(projectRootPath, "audioFiles", "smbsound.wav");
+
+                // Play the sound file
+                using SoundPlayer soundPlayer = new SoundPlayer(soundFilePath);
+                soundPlayer.Play();
             }
             catch (FileNotFoundException)
             {
@@ -24,7 +31,14 @@ public static class SoundAccess
         {
             try
             {
-                using SoundPlayer soundPlayer = new SoundPlayer("robloxsound.wav");
+                string basePath = AppDomain.CurrentDomain.BaseDirectory;
+                string projectRootPath = Path.Combine(basePath, "..", "..", "..");
+
+                // Combine with the relative path to the audio file in the project directory
+                string soundFilePath = Path.Combine(projectRootPath, "audioFiles", "robloxsound.wav");
+
+                // Play the sound file
+                using SoundPlayer soundPlayer = new SoundPlayer(soundFilePath);
                 soundPlayer.Play();
             }
             catch (FileNotFoundException)
@@ -40,7 +54,14 @@ public static class SoundAccess
         {
             try
             {
-                using SoundPlayer soundPlayer = new SoundPlayer("zyzz.wav");
+                string basePath = AppDomain.CurrentDomain.BaseDirectory;
+                string projectRootPath = Path.Combine(basePath, "..", "..", "..");
+
+                // Combine with the relative path to the audio file in the project directory
+                string soundFilePath = Path.Combine(projectRootPath, "audioFiles", "zyzz.wav");
+
+                // Play the sound file
+                using SoundPlayer soundPlayer = new SoundPlayer(soundFilePath);
                 soundPlayer.Play();
             }
             catch (FileNotFoundException)
@@ -56,7 +77,14 @@ public static class SoundAccess
         {
             try
             {
-                using SoundPlayer soundPlayer = new SoundPlayer("augh.wav");
+                string basePath = AppDomain.CurrentDomain.BaseDirectory;
+                string projectRootPath = Path.Combine(basePath, "..", "..", "..");
+
+                // Combine with the relative path to the audio file in the project directory
+                string soundFilePath = Path.Combine(projectRootPath, "audioFiles", "augh.wav");
+
+                // Play the sound file
+                using SoundPlayer soundPlayer = new SoundPlayer(soundFilePath);
                 soundPlayer.Play();
             }
             catch (FileNotFoundException)
@@ -72,7 +100,14 @@ public static class SoundAccess
         {
             try
             {
-                using SoundPlayer soundPlayer = new SoundPlayer("fight.wav");
+                string basePath = AppDomain.CurrentDomain.BaseDirectory;
+                string projectRootPath = Path.Combine(basePath, "..", "..", "..");
+
+                // Combine with the relative path to the audio file in the project directory
+                string soundFilePath = Path.Combine(projectRootPath, "audioFiles", "fight.wav");
+
+                // Play the sound file
+                using SoundPlayer soundPlayer = new SoundPlayer(soundFilePath);
                 soundPlayer.Play();
             }
             catch (FileNotFoundException)
