@@ -126,7 +126,7 @@ public class BattleMode
                             }
                         case "Aksol":
                             {
-                                damage = RandomDamage(0, Weapon.maximumDamage);
+                                damage = RandomDamage(5, Weapon.maximumDamage);
                                 damage = damage * 3;
                                 Console.WriteLine($"Wow you hit the {Monster.Name} for {damage}!");
                                 Monster.CurrentHitPoints -= damage;
@@ -134,7 +134,7 @@ public class BattleMode
                             }
                         default:
                             {
-                                damage = RandomDamage(0, Weapon.maximumDamage);
+                                damage = RandomDamage(5, Weapon.maximumDamage);
                                 Console.WriteLine($"You hit {Monster.Name} for {damage} damage.");
                                 Monster.CurrentHitPoints -= damage;
                                 break;
@@ -239,7 +239,7 @@ public class BattleMode
 
     public int KasperDamage()
     {
-        int kasperDamage = RandomDamage(0, Weapon.maximumDamage);
+        int kasperDamage = RandomDamage(5, Weapon.maximumDamage);
         Random rnd = new Random();
         int rndChance = rnd.Next(0, 101);
         if (rndChance > 0 && rndChance < 50)
