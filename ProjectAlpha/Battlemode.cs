@@ -34,11 +34,11 @@ public class BattleMode
             {
                 art.Snake();
             }
-            else if(Monster.Name == "Rat")
+            else if (Monster.Name == "Rat")
             {
                 art.Rat();
             }
-            else if(Monster.Name == "Giant Spider")
+            else if (Monster.Name == "Giant Spider")
             {
                 art.Spider();
             }
@@ -158,13 +158,14 @@ public class BattleMode
                     }
 
                     // Monster attacks back if not dead
-                    damage = RandomDamage(0, Monster.MaximumDamage);
+                    damage = RandomDamage(2, Monster.MaximumDamage);
                     Console.WriteLine($"The {Monster.Name} hit you for {damage} damage.");
                     Player.Current_hp -= damage;
 
                     // Check if the player is defeated after monster's attack
-                    if (Player.Current_hp <= 0)
+                    if (Player.Current_hp < 1)
                     {
+                        Player.Current_hp = 0;
                         Console.WriteLine("You have been defeated............");
                         inBattle = false;  // End the battle
                         Console.ReadKey();

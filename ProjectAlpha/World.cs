@@ -25,7 +25,7 @@ public static class World
     public const int QUEST_ID_CLEAR_ALCHEMIST_GARDEN = 1;
     public const int QUEST_ID_CLEAR_FARMERS_FIELD = 2;
     public const int QUEST_ID_COLLECT_SPIDER_SILK = 3;
-    
+
 
     public const int LOCATION_ID_HOME = 1;
     public const int LOCATION_ID_TOWN_SQUARE = 2;
@@ -62,7 +62,7 @@ public static class World
     public static void PopulateWeapons()
     {
         Weapons.Add(new Weapon(WEAPON_ID_RUSTY_SWORD, "Rusty sword", 15));
-        Weapons.Add(new Weapon(WEAPON_ID_CLUB, "Club", 25));
+        Weapons.Add(new Weapon(WEAPON_ID_CLUB, "Club", 45));
         Weapons.Add(new Weapon(WEAPON_ID_AXE, "Axe", 80));
         Weapons.Add(new Weapon(WEAPON_ID_MACE, "Mace", 75));
         Weapons.Add(new Weapon(WEAPON_ID_SPEAR, "Spear", 30));
@@ -71,13 +71,13 @@ public static class World
 
     public static void PopulateMonsters()
     {
-        Monster rat = new Monster(MONSTER_ID_RAT, "Rat", 15, 25, 25, QuestByID(QUEST_ID_CLEAR_ALCHEMIST_GARDEN));
+        Monster rat = new Monster(MONSTER_ID_RAT, "Rat", 12, 25, 25, QuestByID(QUEST_ID_CLEAR_ALCHEMIST_GARDEN));
 
 
         Monster snake = new Monster(MONSTER_ID_SNAKE, "Snake", 10, 7, 7, QuestByID(QUEST_ID_CLEAR_FARMERS_FIELD));
 
 
-        Monster giantSpider = new Monster(MONSTER_ID_GIANT_SPIDER, "Giant Spider", 3, 200, 200, QuestByID(QUEST_ID_COLLECT_SPIDER_SILK));
+        Monster giantSpider = new Monster(MONSTER_ID_GIANT_SPIDER, "Giant Spider", 20, 150, 150, QuestByID(QUEST_ID_COLLECT_SPIDER_SILK));
 
 
         Monster goblinThief = new Monster(MONSTER_ID_GOBLIN_THIEF, "Carlo The Goblin Thief", 2, 50, 50, null);
