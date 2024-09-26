@@ -177,7 +177,7 @@ public class Player
         //string healthBar = new string('-', mathsSegments) + new string('-', barLength - mathsSegments );
 
         // Display the health bar
-        health += $"Health -`♡´- {Current_hp}/{Max_hp} {healthPercentage}%\n";
+        health += $"Player health: {Current_hp}/{Max_hp} {healthPercentage}%\n";
         return health;
     }
 }
